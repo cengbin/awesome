@@ -14,7 +14,7 @@ var paths = {
     src: [
       'src/css/index.scss'
     ],
-    dest: 'output/styles/'
+    dest: 'output/style/'
   },
   scripts: {
     src: [
@@ -24,7 +24,7 @@ var paths = {
       'src/js/util/string.js',
       'src/js/canvas/Texture.js',
     ],
-    dest: 'output/scripts/'
+    dest: 'output/script/'
   }
 };
 

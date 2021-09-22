@@ -1,12 +1,17 @@
-// 网格系统
+/**
+ * 网格系统
+ * */
 
+// 网格根容器
 .container {
   @include make-container();
   @include make-container-max-widths();
 }
 
+// 网格行
 .row {
   @include make-row();
 }
 
+// 网格列
 @include make-grid-columns();
