@@ -15,7 +15,7 @@ function parseURL (url) {
     host: a.hostname,
     port: a.port,
     query: a.search,
-    params: parseQuery(a.search),
+    params: getQueryObj(a.search),
     file: (a.pathname.match(/([^/?#]+)$/i) || [, ''])[1],
     hash: a.hash.replace('#', ''),
     path: a.pathname.replace(/^([^/])/, '/$1'),
@@ -27,17 +27,22 @@ function parseURL (url) {
 /**
  * 解析query转对象
  * */
-function parseQuery (query) {
+function getQueryObj(query) {
+  !query && (query = window.location.search);
+
   var ret = {},
     seg = query.trim().replace(/^(\?|#|&)/, '').split('&'),
+    i = 0,
+    len = seg.length,
     s;
-  for (var i = 0; i < seg.length; i++) {
+  for (; i < len; i++) {
     if (!seg[i]) {
       continue;
     }
     s = seg[i].split('=');
     ret[s[0]] = s[1];
   }
+
   return ret;
 }
 
