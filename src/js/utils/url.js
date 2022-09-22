@@ -5,9 +5,9 @@
  *
  * @example parseURL(window.location.href)
  * */
-function parseURL (url) {
-  var a = document.createElement('a');
-  a.href = url;
+function parseURL(url) {
+  var a = document.createElement('a')
+  a.href = url
   return {
     origin: a.origin,
     source: url,
@@ -21,35 +21,29 @@ function parseURL (url) {
     path: a.pathname.replace(/^([^/])/, '/$1'),
     relative: (a.href.match(/tps?:\/[^/]+(.+)/) || [, ''])[1],
     segments: a.pathname.replace(/^\//, '').split('/')
-  };
+  }
 }
 
 /**
  * 解析query转对象
  * */
 function getQueryObj(query) {
-  !query && (query = window.location.search);
+  query = query || window.location.search
 
-  var ret = {},
-    seg = query.trim().replace(/^(\?|#|&)/, '').split('&'),
-    i = 0,
-    len = seg.length,
-    s;
-  for (; i < len; i++) {
-    if (!seg[i]) {
-      continue;
-    }
-    s = seg[i].split('=');
-    ret[s[0]] = s[1];
-  }
-
-  return ret;
+  return query
+    .replace(/(^\?)/, '')
+    .split('&')
+    .reduce((searchParams, keyValuePair) => {
+      keyValuePair = keyValuePair.split('=')
+      searchParams[keyValuePair[0]] = keyValuePair[1]
+      return searchParams
+    }, {})
 }
 
 /**
  * 对象转query字符串
  * */
-function stringifyQuery (obj) {
+function stringifyQuery(obj) {
   const res = obj
     ? Object.keys(obj)
       .map(key => {
