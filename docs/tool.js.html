@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>index.js - Documentation</title>
+    <title>tool.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">tool.js</h1>
     
 
     
@@ -40,98 +40,40 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * 用户信息
- * @typedef {Object} UserInfo
- * @property {string} name - 姓名
- * @property {number} age - 年龄
+ * tools 全局命名空间
+ * @namespace tool
  */
-
-/**
- * 函数说明
- * @param {UserInfo} userInfo - 用户信息
- */
-function myFunction(userInfo) {
-  // 函数实现
+var Tools = {
+  /** documented as MyNamespace.bar */
+  bar: 1
 }
 
+
 /**
- * 函数说明
- * @param {string} name - 名称
- * @throws {Error} 如果名称为空，则抛出异常
- */
-function myFunction2(name) {
-  if (!name) {
-    throw new Error('名称不能为空')
-  }
-  // 函数实现
+ * documented as tools.foo
+ * @memberof tool
+ * */
+var foo = function () {
+
 }
 
+Tools.foo = foo
+
 /**
- * 函数说明
- * @template T
- * @param {Array&lt;T>} arr - 数组
- * @returns {T} 数组中的第一个元素
- */
-function myFunction3(arr) {
-  return arr[0]
+ * 加法函数
+ * @since 3.0.0
+ * @category Array
+ * @memberOf tool
+ * @param {number} a - 加数
+ * @param {number} b - 被加数
+ * @return {number} 值
+ * @example plus(1,1)
+ * */
+function plus(a, b) {
+
 }
 
-/**
- * 函数说明
- * @param {string} name - 名称
- * @param {string} [type] - 类型（可选）
- * @returns {string} 字符串
- */
-function myFunction4(name, type) {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @param {string} [type='default'] - 类型（可选，默认为 'default'）
- * @returns {string} 字符串
- */
-function myFunction5(name, type = 'default') {
-  // 函数实现
-}
-
-/**
- * 函数说明6
- * @param {string=} name - 名称
- * @param {string=} type - 类型（可选，默认为 'default'）
- * @returns {string} 字符串
- */
-function myFunction6(name = '', type = 'default') {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @name myfunc7
- * @param {Object} config - 配置项
- * @param {string=} config.name - 名称
- * @param {number} config.age - 年龄
- */
-function myFunction7(config) {
-  // 函数实现
-}
-
-/**
- * @name dmall属性
- * @description 全局属性window.dmall
- */
-var dmall = null
-
-/**
- * Set the shoe's color.
- *
- * @param {SHOE_COLORS} color - The shoe color. Must be an enumerated
- * value of {@link SHOE_COLORS}.
- */
-var setColor = function (color) {
-  // ...
-}</code></pre>
+Tools.plus = plus</code></pre>
         </article>
     </section>
 

@@ -1,13 +1,40 @@
 {
+  // 配置插件
+  "plugins": [
+    // 启用 Markdown 插件（它将 Markdown 格式的文本转换为 HTML）
+    "plugins/markdown"
+  ],
+  // 指定输入文件
   "source": {
-    "include": [ "src/" ],
-    "exclude": [ "src/libs" ]
+    "include": [
+      "src/"
+    ],
+    "exclude": [
+      "src/libs"
+    ],
+    "source": {
+      "includePattern": ".+\\.js(doc|x)?|md$",
+      "excludePattern": "(^|\\/|\\\\)_"
+    }
   },
+  // 将命令行选项合并到配置文件中
   "opts": {
-//    "template": "node_modules/docdash",
-    "encoding": "utf8",
-    "destination": "./docs/",
+    // 生成文档的模板，默认是 templates/default
+    "template": "node_modules/minami",
+    // 文档首页展示内容
+    "readme": "README.md",
+    // 生成文档的路径
+    "destination": "docs/",
+    // 运行时是否递归子目录
     "recurse": true,
+    // 运行时是否输出详细信息，默认是 false
     "verbose": true
+  },
+  // 配置模板
+  "templates": {
+    "default": {
+      // 在页脚显示当前日期
+      "includeDate": true
+    }
   }
 }

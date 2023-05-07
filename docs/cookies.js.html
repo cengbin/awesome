@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>index.js - Documentation</title>
+    <title>cookies.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">cookies.js</h1>
     
 
     
@@ -40,97 +40,115 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * 用户信息
- * @typedef {Object} UserInfo
- * @property {string} name - 姓名
- * @property {number} age - 年龄
- */
-
-/**
- * 函数说明
- * @param {UserInfo} userInfo - 用户信息
- */
-function myFunction(userInfo) {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @throws {Error} 如果名称为空，则抛出异常
- */
-function myFunction2(name) {
-  if (!name) {
-    throw new Error('名称不能为空')
-  }
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @template T
- * @param {Array&lt;T>} arr - 数组
- * @returns {T} 数组中的第一个元素
- */
-function myFunction3(arr) {
-  return arr[0]
-}
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @param {string} [type] - 类型（可选）
- * @returns {string} 字符串
- */
-function myFunction4(name, type) {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @param {string} [type='default'] - 类型（可选，默认为 'default'）
- * @returns {string} 字符串
- */
-function myFunction5(name, type = 'default') {
-  // 函数实现
-}
-
-/**
- * 函数说明6
- * @param {string=} name - 名称
- * @param {string=} type - 类型（可选，默认为 'default'）
- * @returns {string} 字符串
- */
-function myFunction6(name = '', type = 'default') {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @name myfunc7
- * @param {Object} config - 配置项
- * @param {string=} config.name - 名称
- * @param {number} config.age - 年龄
- */
-function myFunction7(config) {
-  // 函数实现
-}
-
-/**
- * @name dmall属性
- * @description 全局属性window.dmall
- */
-var dmall = null
-
-/**
- * Set the shoe's color.
+ * Sets a Cookie with the given name and value.
  *
- * @param {SHOE_COLORS} color - The shoe color. Must be an enumerated
- * value of {@link SHOE_COLORS}.
+ * name       Name of the cookie
+ * value      Value of the cookie
+ * [expires]  Expiration date of the cookie (default: end of current session)
+ * [path]     Path where the cookie is valid (default: path of calling document)
+ * [domain]   Domain where the cookie is valid
+ *              (default: domain of calling document)
+ * [secure]   Boolean value indicating if the cookie transmission requires a
+ *              secure transmission
+ * @memberof cookie
+ * @example setCookie("tasty","strawberry2")
+ * @example setCookie("yummy","choco2",getDate('s3'))
  */
-var setColor = function (color) {
-  // ...
+function setCookie(name, value, expires, path, domain, secure) {
+  document.cookie = name + '=' + escape(value) +
+    ((expires) ? '; expires=' + expires.toUTCString() : '') +
+    ((path) ? '; path=' + path : '') +
+    ((domain) ? '; domain=' + domain : '') +
+    ((secure) ? '; secure' : '')
+}
+
+/**
+ * Gets the value of the specified cookie.
+ *
+ * name  Name of the desired cookie.
+ *
+ * Returns a string containing value of specified cookie,
+ *   or null if cookie does not exist.
+ * @memberof cookie
+ * @example getCookie('tasty')
+ */
+function getCookie(name) {
+  var dc = document.cookie
+  var prefix = name + '='
+  var begin = dc.indexOf('; ' + prefix)
+  if (begin === -1) {
+    begin = dc.indexOf(prefix)
+    if (begin !== 0) return null
+  } else {
+    begin += 2
+  }
+  var end = document.cookie.indexOf(';', begin)
+  if (end === -1) {
+    end = dc.length
+  }
+  return unescape(dc.substring(begin + prefix.length, end))
+}
+
+/**
+ * Deletes the specified cookie.
+ *
+ * name      name of the cookie
+ * [path]    path of the cookie (must be same as path used to create cookie)
+ * [domain]  domain of the cookie (must be same as domain used to create cookie)
+ * @memberof cookie
+ * @example deleteCookie('tasty','/grou-purchase','.abobe.com');
+ */
+function deleteCookie(name, path, domain) {
+  if (getCookie(name)) {
+    document.cookie = name + '=' +
+      ((path) ? '; path=' + path : '') +
+      ((domain) ? '; domain=' + domain : '') +
+      '; expires=Thu, 01-Jan-70 00:00:01 GMT'
+  }
+}
+
+/**
+ * 获取当前时间之后的指定时间
+ * @memberof cookie
+ * @param number 数字
+ * @param unit 单位(s秒 m分钟 h小时 d天)
+ * @return {Date} 指定的时间Date对象
+ * @example
+ *
+ * 30s之后的时间：getDate(30,'s') => Sun May 07 2023 14:25:55 GMT+0800 (中国标准时间)
+ *
+ * 30s之后的时间：getDate(30,'s')
+ * =>
+ * Sun May 07 2023 14:25:55 GMT+0800 (中国标准时间)
+ *
+ * */
+function getDate(number, unit) {
+  var time = 0
+  if (unit === 's') {
+    time = number * 1000
+  } else if (unit === 'm') {
+    time = number * 60 * 1000
+  } else if (unit === 'h') {
+    time = number * 60 * 60 * 1000
+  } else if (unit === 'd') {
+    time = number * 24 * 60 * 60 * 1000
+  } else {
+    time = number * 1000
+  }
+  var date = new Date()
+  date.setTime(date.valueOf() + time)
+  return date
+}
+
+/**
+ * cookie 全局命名空间
+ * @namespace cookie
+ */
+var cookie = {
+  getDate,
+  setCookie,
+  getCookie,
+  deleteCookie
 }</code></pre>
         </article>
     </section>
