@@ -76,11 +76,6 @@ function myFunction7(config) {
   // 函数实现
 }
 
-/**
- * @name dmall属性
- * @description 全局属性window.dmall
- */
-var dmall = null
 
 /**
  * Set the shoe's color.
@@ -91,3 +86,23 @@ var dmall = null
 var setColor = function (color) {
   // ...
 }
+
+/**
+ * 版本号
+ * @type {string}
+ * */
+var version = "1.0.0"
+
+/**
+ * 时间对象
+ * @type {Date}
+ */
+const ins = new Date()
+
+// ins.getDay()
+
+/**
+ * promise对象
+ * @type {Promise<string>}
+ */
+const promise = new Promise((resolve => resolve('hello')))

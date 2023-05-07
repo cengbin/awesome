@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "minami": "^1.2.3"
+    "docdash": "^2.0.1"
   }
 }
