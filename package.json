@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "rollup --config rollup.config.js  -w",
     "generate-docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "docdash": "^2.0.1"
+    "docdash": "^2.0.1",
+    "rollup": "^1.27.8",
+    "rollup-watch": "^4.3.1"
   }
 }

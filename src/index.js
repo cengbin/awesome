@@ -1,108 +1,35 @@
-/**
- * 用户信息
- * @typedef {Object} UserInfo
- * @property {string} name - 姓名
- * @property {number} age - 年龄
- */
+import {addClass, removeClass, hasClass, toggleClass} from "./class"
 
 /**
- * 函数说明
- * @param {UserInfo} userInfo - 用户信息
+ * 添加script
+ * @param {string} url js url
+ * @param {function} [onload] 加载成功回调
+ * @param {function} [onerror] 加载失败回调
+ * @return {HTMLElement} script引用
  */
-function myFunction(userInfo) {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @throws {Error} 如果名称为空，则抛出异常
- */
-function myFunction2(name) {
-  if (!name) {
-    throw new Error('名称不能为空')
+function addScript(url, onload, onerror) {
+  var script = document.createElement('script')
+  if (onload) {
+    script.onload = function () {
+      onload(script)
+    }
   }
-  // 函数实现
+  script.onerror = function () {
+    if (onerror) {
+      onerror(script)
+    } else if (onload) {
+      onload(script)
+    }
+  }
+  script.src = url
+  document.head.appendChild(script)
+  return script
 }
 
-/**
- * 函数说明
- * @template T
- * @param {Array<T>} arr - 数组
- * @returns {T} 数组中的第一个元素
- */
-function myFunction3(arr) {
-  return arr[0]
+export {
+  addClass,
+  removeClass,
+  hasClass,
+  toggleClass,
+  addScript,
 }
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @param {string} [type] - 类型（可选）
- * @returns {string} 字符串
- */
-function myFunction4(name, type) {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @param {string} name - 名称
- * @param {string} [type='default'] - 类型（可选，默认为 'default'）
- * @returns {string} 字符串
- */
-function myFunction5(name, type = 'default') {
-  // 函数实现
-}
-
-/**
- * 函数说明6
- * @param {string=} name - 名称
- * @param {string=} type - 类型（可选，默认为 'default'）
- * @returns {string} 字符串
- */
-function myFunction6(name = '', type = 'default') {
-  // 函数实现
-}
-
-/**
- * 函数说明
- * @name myfunc7
- * @param {Object} config - 配置项
- * @param {string=} config.name - 名称
- * @param {number} config.age - 年龄
- */
-function myFunction7(config) {
-  // 函数实现
-}
-
-
-/**
- * Set the shoe's color.
- *
- * @param {SHOE_COLORS} color - The shoe color. Must be an enumerated
- * value of {@link SHOE_COLORS}.
- */
-var setColor = function (color) {
-  // ...
-}
-
-/**
- * 版本号
- * @type {string}
- * */
-var version = "1.0.0"
-
-/**
- * 时间对象
- * @type {Date}
- */
-const ins = new Date()
-
-// ins.getDay()
-
-/**
- * promise对象
- * @type {Promise<string>}
- */
-const promise = new Promise((resolve => resolve('hello')))

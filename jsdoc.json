@@ -2,13 +2,11 @@
   // 配置插件
   "plugins": [
     // 启用 Markdown 插件（它将 Markdown 格式的文本转换为 HTML）
-    "plugins/markdown",
-    "plugins/shout.js"
+    "plugins/markdown"
   ],
   // 指定输入文件
   "source": {
     "include": [
-      "src/star.md",
       "src"
     ],
     "exclude": [

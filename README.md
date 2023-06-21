@@ -1,3 +1,3 @@
 # Welcome
 
-这是一个JavaScript 函数工具库
+一个 Web 前端 JavaScript 函数库
