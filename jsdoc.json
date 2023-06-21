@@ -46,7 +46,7 @@
       // Adding additional menu items after Home
       "Gitlab 链接": {
         // Menu item name
-        "href": "https://myproject.com",
+        "href": "https://github.com/web-frontend-engineering/web-library",
         //the rest of HTML properties to add to manu item
         "target": "_blank",
         "class": "menu-item",

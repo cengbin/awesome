@@ -1,4 +1,7 @@
-import {addClass, removeClass, hasClass, toggleClass} from "./class"
+export * from "./class"
+export * from "./cookies"
+export * from "./regexp"
+export * from "./url"
 
 /**
  * 添加script
@@ -7,7 +10,7 @@ import {addClass, removeClass, hasClass, toggleClass} from "./class"
  * @param {function} [onerror] 加载失败回调
  * @return {HTMLElement} script引用
  */
-function addScript(url, onload, onerror) {
+export function addScript(url, onload, onerror) {
   var script = document.createElement('script')
   if (onload) {
     script.onload = function () {
@@ -24,12 +27,4 @@ function addScript(url, onload, onerror) {
   script.src = url
   document.head.appendChild(script)
   return script
-}
-
-export {
-  addClass,
-  removeClass,
-  hasClass,
-  toggleClass,
-  addScript,
 }

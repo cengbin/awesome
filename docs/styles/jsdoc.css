@@ -240,7 +240,7 @@ nav.wrap a{
 nav h3 {
   margin-top: 12px;
   font-size: 13px;
-  /*text-transform: uppercase;*/
+  text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;
   line-height: 24px;

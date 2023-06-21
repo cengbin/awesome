@@ -1,8 +1,8 @@
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/bin.js',
+    file: 'dist/web-library.js',
     format: 'umd',
-    name: 'zb'
+    name: 'star'
   },
 }
