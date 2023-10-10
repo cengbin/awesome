@@ -265,8 +265,25 @@
     return res ? `?${res}` : ''
   }
 
+  const formatTime = date => {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+
+    return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
+  };
+
+  const formatNumber = n => {
+    n = n.toString();
+    return n[1] ? n : `0${n}`
+  };
+
   /**
    * 添加script
+   *
    * @param {string} url js url
    * @param {function} [onload] 加载成功回调
    * @param {function} [onerror] 加载失败回调
@@ -294,6 +311,7 @@
   exports.addClass = addClass;
   exports.addScript = addScript;
   exports.deleteCookie = deleteCookie;
+  exports.formatTime = formatTime;
   exports.getCookie = getCookie;
   exports.getDate = getDate;
   exports.hasClass = hasClass;

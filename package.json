@@ -1,7 +1,7 @@
 {
-  "name": "web-library",
+  "name": "web-common",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web前端公共基础 JavaScript 库",
   "main": "index.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js  -w",

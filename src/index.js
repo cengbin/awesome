@@ -2,9 +2,11 @@ export * from "./class"
 export * from "./cookies"
 export * from "./regexp"
 export * from "./url"
+export * from "./util"
 
 /**
  * 添加script
+ *
  * @param {string} url js url
  * @param {function} [onload] 加载成功回调
  * @param {function} [onerror] 加载失败回调
