@@ -1,3 +1,3 @@
 # web-common
 
-Web 前端公共 CSS 、JavaScript 库
+Web 前端公共基础 CSS 、JavaScript 库
