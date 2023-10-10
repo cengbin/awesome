@@ -1,3 +1,3 @@
-# Welcome
+# web-common
 
-一个 Web 前端 JavaScript 函数库
+Web 前端公共 CSS 、JavaScript 库
