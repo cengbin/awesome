@@ -1,8 +1,8 @@
-export * from "./class"
-export * from "./cookies"
-export * from "./regexp"
-export * from "./url"
-export * from "./util"
+export * from './class'
+export * from './cookies'
+export * from './regexp'
+export * from './url'
+export * from './util';
 
 /**
  * 添加script
@@ -13,20 +13,20 @@ export * from "./util"
  * @return {HTMLElement} script引用
  */
 export function addScript(url, onload, onerror) {
-  var script = document.createElement('script')
-  if (onload) {
-    script.onload = function () {
-      onload(script)
-    }
-  }
-  script.onerror = function () {
-    if (onerror) {
-      onerror(script)
-    } else if (onload) {
-      onload(script)
-    }
-  }
-  script.src = url
-  document.head.appendChild(script)
-  return script
+	var script = document.createElement('script')
+	if (onload) {
+		script.onload = function () {
+			onload(script)
+		}
+	}
+	script.onerror = function () {
+		if (onerror) {
+			onerror(script)
+		} else if (onload) {
+			onload(script)
+		}
+	}
+	script.src = url
+	document.head.appendChild(script)
+	return script
 }
