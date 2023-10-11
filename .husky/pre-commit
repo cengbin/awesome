@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "husky ===> 1. 执行 pre-commit 钩子" && npx lint-staged
