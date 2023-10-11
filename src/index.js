@@ -2,7 +2,7 @@ export * from './class'
 export * from './cookies'
 export * from './regexp'
 export * from './url'
-export * from './util';
+export * from './util'
 
 /**
  * 添加script
