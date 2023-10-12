@@ -1,13 +1,96 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(global = global || self, factory(global.common = {}));
-}(this, (function (exports) { 'use strict';
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.common = {}));
+})(this, (function (exports) { 'use strict';
 
 	/**
-	 * class模块
-	 * @module class
+	 * date 时间处理
+	 * @module web-common-tools/date
 	 * */
+
+	/**
+	 * 格式化现在的已过时间
+	 * @param {Date} startTime
+	 * @return {String}
+	 */
+	function formatPassTime(startTime) {
+		let currentTime = Date.parse(new Date()),
+			time = currentTime - startTime,
+			day = parseInt(time / (1000 * 60 * 60 * 24)),
+			hour = parseInt(time / (1000 * 60 * 60)),
+			min = parseInt(time / (1000 * 60)),
+			month = parseInt(day / 30),
+			year = parseInt(month / 12);
+		if (year) return year + '年前'
+		if (month) return month + '个月前'
+		if (day) return day + '天前'
+		if (hour) return hour + '小时前'
+		if (min) return min + '分钟前'
+		else return '刚刚'
+	}
+
+	/**
+	 * 格式化时间戳
+	 * @param {number} time 时间戳
+	 * @param {string} fmt 格式
+	 * @return {String}
+	 */
+	function formatTime(time, fmt = 'yyyy-mm-dd hh:mm:ss') {
+		let ret;
+		let date = new Date(time);
+		let opt = {
+			'y+': date.getFullYear().toString(),
+			'M+': (date.getMonth() + 1).toString(), //月份
+			'd+': date.getDate().toString(), //日
+			'h+': date.getHours().toString(), //小时
+			'm+': date.getMinutes().toString(), //分
+			's+': date.getSeconds().toString() //秒
+		};
+		for (let k in opt) {
+			ret = new RegExp('(' + k + ')').exec(fmt);
+			if (ret) {
+				fmt = fmt.replace(ret[1], ret[1].length === 1 ? opt[k] : opt[k].padStart(ret[1].length, '0'));
+			}
+		}
+		return fmt
+	}
+
+	const date = {
+		formatPassTime,
+		formatTime
+	};
+
+	/**
+	 * dom DOM操作
+	 * @module web-common-tools/dom
+	 * */
+
+	/**
+	 * 添加script
+	 * @param {string} url js url
+	 * @param {function} [onload] 加载成功回调
+	 * @param {function} [onerror] 加载失败回调
+	 * @return {HTMLElement} script引用
+	 */
+	function addScript(url, onload, onerror) {
+		var script = document.createElement('script');
+		if (onload) {
+			script.onload = function () {
+				onload(script);
+			};
+		}
+		script.onerror = function () {
+			if (onerror) {
+				onerror(script);
+			} else if (onload) {
+				onload(script);
+			}
+		};
+		script.src = url;
+		document.head.appendChild(script);
+		return script
+	}
 
 	/**
 	 * DOM添加类
@@ -56,282 +139,127 @@
 	}
 
 	/**
-	 * cookies模块
-	 * @module cookies
+	 * tools 常用的工具函数
+	 * @module web-common-tools/tools
 	 * */
 
-	/**
-	 * Sets a Cookie with the given name and value.
-	 *
-	 * name       Name of the cookie
-	 * value      Value of the cookie
-	 * [expires]  Expiration date of the cookie (default: end of current session)
-	 * [path]     Path where the cookie is valid (default: path of calling document)
-	 * [domain]   Domain where the cookie is valid
-	 *              (default: domain of calling document)
-	 * [secure]   Boolean value indicating if the cookie transmission requires a
-	 *              secure transmission
-	 *
-	 * @example setCookie("tasty","strawberry2")
-	 * @example setCookie("yummy","choco2",getDate('s3'))
-	 */
-	function setCookie(name, value, expires, path, domain, secure) {
-		document.cookie =
-			name +
-			'=' +
-			escape(value) +
-			(expires ? '; expires=' + expires.toUTCString() : '') +
-			(path ? '; path=' + path : '') +
-			(domain ? '; domain=' + domain : '') +
-			(secure ? '; secure' : '');
+	// 类型检测
+	function getType(obj) {
+		return Object.prototype.toString.call(obj).slice(8, -1)
 	}
 
 	/**
-	 * Gets the value of the specified cookie.
-	 *
-	 * name  Name of the desired cookie.
-	 *
-	 * Returns a string containing value of specified cookie,
-	 *   or null if cookie does not exist.
-	 *
-	 * @example getCookie('tasty')
+	 * 递归 深拷贝
+	 * @param data: 拷贝的数据
 	 */
-	function getCookie(name) {
-		var dc = document.cookie;
-		var prefix = name + '=';
-		var begin = dc.indexOf('; ' + prefix);
-		if (begin === -1) {
-			begin = dc.indexOf(prefix);
-			if (begin !== 0) return null
+	function deepCopyBy(data) {
+		const t = getType(data);
+		let o;
+		if (t === 'array') {
+			o = [];
+		} else if (t === 'object') {
+			o = {};
 		} else {
-			begin += 2;
+			return data
 		}
-		var end = document.cookie.indexOf(';', begin);
-		if (end === -1) {
-			end = dc.length;
-		}
-		return unescape(dc.substring(begin + prefix.length, end))
-	}
 
-	/**
-	 * Deletes the specified cookie.
-	 *
-	 * name      name of the cookie
-	 * [path]    path of the cookie (must be same as path used to create cookie)
-	 * [domain]  domain of the cookie (must be same as domain used to create cookie)
-	 *
-	 * @example deleteCookie('tasty','/grou-purchase','.abobe.com');
-	 */
-	function deleteCookie(name, path, domain) {
-		if (getCookie(name)) {
-			document.cookie =
-				name +
-				'=' +
-				(path ? '; path=' + path : '') +
-				(domain ? '; domain=' + domain : '') +
-				'; expires=Thu, 01-Jan-70 00:00:01 GMT';
-		}
-	}
-
-	/**
-	 * 获取想要的时间
-	 * @param str s1一秒 h1一小时 d1一天
-	 * @return {number} 当前时间+str的时间
-	 * @example getDate('s30') 30s之后的时间
-	 * */
-	function getDate(str) {
-		var str1 = str.substring(0, 1);
-		var str2 = str.substring(1, str.length) * 1;
-		var time = 0;
-		if (str1 === 's') {
-			time = str2 * 1000;
-		} else if (str1 === 'h') {
-			time = str2 * 60 * 60 * 1000;
-		} else if (str1 === 'd') {
-			time = str2 * 24 * 60 * 60 * 1000;
-		}
-		var data = new Date();
-		data.setTime(data.valueOf() + time);
-		return data
-	}
-
-	/**
-	 * 添加script
-	 * @param {string} url js url
-	 * @param {function} [onload] 加载成功回调
-	 * @param {function} [onerror] 加载失败回调
-	 * @return {HTMLElement} script引用
-	 */
-	function addScript(url, onload, onerror) {
-		var script = document.createElement('script');
-		if (onload) {
-			script.onload = function () {
-				onload(script);
-			};
-		}
-		script.onerror = function () {
-			if (onerror) {
-				onerror(script);
-			} else if (onload) {
-				onload(script);
+		if (t === 'array') {
+			for (let i = 0; i < data.length; i++) {
+				o.push(deepCopy(data[i]));
 			}
+		} else if (t === 'object') {
+			for (let i in data) {
+				o[i] = deepCopy(data[i]);
+			}
+		}
+		return o
+	}
+
+	/**
+	 * JSON 深拷贝
+	 * @param data: 拷贝的数据
+	 * @return data Object 复制后生成的对象
+	 */
+	function deepCopy(data) {
+		return JSON.parse(JSON.stringify(data))
+	}
+
+	/**
+	 * 根据类型返回正则
+	 * @param str{string}: 检测的内容
+	 * @param type{string}: 检测类型
+	 */
+	function checkType(str, type) {
+		const regexp = {
+			ip: /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/.test(str),
+			port: /^(\d|[1-5]\d{4}|6[1-4]\d{3}|65[1-4]\d{2}|655[1-2]\d|6553[1-5])$/.test(str),
+			phone: /^1[3|4|5|6|7|8][0-9]{9}$/.test(str), //手机号
+			number: /^[0-9]+$/.test(str), //是否全数字,
+			email: /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(str),
+			IDCard:
+				/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(
+					str
+				),
+			url: /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(str)
 		};
-		script.src = url;
-		document.head.appendChild(script);
-		return script
+		return regexp[type]
 	}
 
 	/**
-	 * regexp模块
-	 * @module regexp
-	 * */
-
-	/**
-	 * 判断是否为手机号码
-	 * */
-	function isMobile(s) {
-		var p = /^0*(13|14|15|16|17|18)\d{9}$/;
-		return p.test(s)
+	 * 将手机号中间部分替换为星号
+	 * @param phone{string}: 手机号码
+	 */
+	function formatPhone(phone) {
+		return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 	}
 
 	/**
-	 * 判断就否为电子邮箱
-	 * */
-	function isEmail(s) {
-		var myreg = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-		return myreg.test(s)
-	}
+	 * 防抖
+	 * @param func {*}  执行函数
+	 * @param wait {*}  节流时间,毫秒
+	 */
+	function debounce(func, wait) {
+		let timeout;
+		return function () {
+			let context = this;
+			let args = arguments;
 
-	/**
-	 * 判断是否为身份证
-	 * */
-	function isID(s) {
-		var myreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-		return myreg.test(s)
-	}
+			if (timeout) clearTimeout(timeout);
 
-	/**
-	 * url模块
-	 * @module url
-	 * */
-
-	/**
-	 * 解析url
-	 * @param {String} url 需要解析的地址
-	 * @return {Object} 解析url后的对象
-	 *
-	 * @example parseUrl(window.location.href)
-	 * */
-	function parseUrl(url) {
-		var a = document.createElement('a');
-		a.href = url;
-		return {
-			origin: a.origin,
-			source: url,
-			protocol: a.protocol.replace(':', ''),
-			host: a.hostname,
-			port: a.port,
-			query: a.search,
-			params: parseQuery(a.search),
-			file: (a.pathname.match(/([^/?#]+)$/i) || [null, ''])[1],
-			hash: a.hash.replace('#', ''),
-			path: a.pathname.replace(/^([^/])/, '/$1'),
-			relative: (a.href.match(/tps?:\/[^/]+(.+)/) || [null, ''])[1],
-			segments: a.pathname.replace(/^\//, '').split('/')
+			timeout = setTimeout(() => {
+				func.apply(context, args);
+			}, wait);
 		}
 	}
 
 	/**
-	 * 解析query转对象
-	 * */
-	function parseQuery(query) {
-		query = query || window.location.search;
-
-		return query
-			.replace(/(^\?)/, '')
-			.split('&')
-			.reduce((searchParams, keyValuePair) => {
-				keyValuePair = keyValuePair.split('=');
-				searchParams[keyValuePair[0]] = keyValuePair[1];
-				return searchParams
-			}, {})
+	 * 节流
+	 * @param func {*}  执行函数
+	 * @param wait {*}  节流时间,毫秒
+	 */
+	function throttle(func, wait) {
+		let previous = 0;
+		return function () {
+			let now = Date.now();
+			let context = this;
+			if (now - previous > wait) {
+				func.apply(context, arguments);
+				previous = now;
+			}
+		}
 	}
-
-	/**
-	 * 对象转query字符串
-	 * @param query对象
-	 * @return {String} query字符串
-	 * */
-	function stringifyQuery(obj) {
-		const res = obj
-			? Object.keys(obj)
-					.map((key) => {
-						const val = obj[key];
-
-						if (val === undefined) {
-							return ''
-						}
-
-						if (val === null) {
-							return encode(key)
-						}
-
-						if (Array.isArray(val)) {
-							const result = [];
-							val.forEach((val2) => {
-								if (val2 === undefined) {
-									return
-								}
-								if (val2 === null) {
-									result.push(encode(key));
-								} else {
-									result.push(encode(key) + '=' + encode(val2));
-								}
-							});
-							return result.join('&')
-						}
-
-						return encode(key) + '=' + encode(val)
-					})
-					.filter((val) => val.length > 0)
-					.join('&')
-			: null;
-		return res ? `?${res}` : ''
-	}
-
-	const formatTime = (date) => {
-		const year = date.getFullYear();
-		const month = date.getMonth() + 1;
-		const day = date.getDate();
-		const hour = date.getHours();
-		const minute = date.getMinutes();
-		const second = date.getSeconds();
-
-		return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
-	};
-
-	const formatNumber = (n) => {
-		n = n.toString();
-		return n[1] ? n : `0${n}`
-	};
 
 	exports.addClass = addClass;
 	exports.addScript = addScript;
-	exports.deleteCookie = deleteCookie;
-	exports.formatTime = formatTime;
-	exports.getCookie = getCookie;
-	exports.getDate = getDate;
+	exports.checkType = checkType;
+	exports.date = date;
+	exports.debounce = debounce;
+	exports.deepCopy = deepCopy;
+	exports.deepCopyBy = deepCopyBy;
+	exports.formatPhone = formatPhone;
 	exports.hasClass = hasClass;
-	exports.isEmail = isEmail;
-	exports.isID = isID;
-	exports.isMobile = isMobile;
-	exports.parseQuery = parseQuery;
-	exports.parseUrl = parseUrl;
 	exports.removeClass = removeClass;
-	exports.setCookie = setCookie;
-	exports.stringifyQuery = stringifyQuery;
+	exports.throttle = throttle;
 	exports.toggleClass = toggleClass;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+}));

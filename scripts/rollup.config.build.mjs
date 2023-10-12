@@ -1,9 +1,7 @@
-const glob = require('glob')
-const path = require('path')
-const { terser } = require('rollup-plugin-terser')
+import terser from '@rollup/plugin-terser'
 
 function defineConfig() {
-	const entryFiles = glob.sync(path.resolve(__dirname, '../src') + '/*')
+	const entryFiles = ['src/index.js', 'src/date/index.js', 'src/dom/index.js', 'src/http/index.js', 'src/util/index.js']
 	const config = entryFiles.map((filePath) => {
 		const fileName = filePath.split('/').pop()
 		let input = `src/`

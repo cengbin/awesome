@@ -7,9 +7,15 @@ module.exports = {
 		es6: true
 	},
 	globals: {
+		// browser
+		encode: false,
+		// jquery
 		$: true,
 		jQuery: true,
-		encode: false
+		// jest
+		describe: false,
+		test: false,
+		expect: false,
 	},
 	parserOptions: {
 		ecmaVersion: 'latest',

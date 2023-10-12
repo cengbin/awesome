@@ -1,6 +1,11 @@
-# web-common
+# web-common-tools
 
-Web前端公共基础 JavaScript 库
+公共基础 JavaScript 工具库
+
+* date 时间处理
+* dom DOM操作
+* http axios二次封装
+* tools 常用工具函数
 
 ## 技术栈
 
@@ -14,7 +19,7 @@ Web前端公共基础 JavaScript 库
 
 Git Commit提交：husky + lint-staged + commitlint
 
-## 开发
+## 开发说明
 
 开发
 
@@ -36,8 +41,8 @@ Git Commit提交：husky + lint-staged + commitlint
 
 `$ npm publish`
 
-## 使用
+## 使用说明
 
 安装
 
-`$ npm install --save @zengbin/web-common`
+`$ npm install --save @zengbin/web-common-tools`
