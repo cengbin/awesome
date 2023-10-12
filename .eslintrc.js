@@ -4,7 +4,8 @@ module.exports = {
 		browser: true,
 		node: true,
 		commonjs: true,
-		es6: true
+		es6: true,
+		jest:true,
 	},
 	globals: {
 		// browser
@@ -12,11 +13,8 @@ module.exports = {
 		// jquery
 		$: true,
 		jQuery: true,
-		// jest
-		describe: false,
-		test: false,
-		expect: false,
 	},
+	parser: "@babel/eslint-parser",
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module'
