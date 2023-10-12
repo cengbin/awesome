@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>regexp/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,56 +37,47 @@
 
 <div id="main">
     
+    <h1 class="page-title">regexp/index.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * regexp模块
+ * @module regexp
+ * */
 
+/**
+ * 判断是否为手机号码
+ * */
+export function isMobile(s) {
+	var p = /^0*(13|14|15|16|17|18)\d{9}$/
+	return p.test(s)
+}
 
-    <section class="package">
-        <h3> </h3>		
+/**
+ * 判断就否为电子邮箱
+ * */
+export function isEmail(s) {
+	var myreg = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+	return myreg.test(s)
+}
+
+/**
+ * 判断是否为身份证
+ * */
+export function isID(s) {
+	var myreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+	return myreg.test(s)
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><h1>web-common</h1>
-<p>Web前端公共基础 JavaScript 库</p>
-<h2>技术栈</h2>
-<p>模块打包：rollup</p>
-<p>测试：jest</p>
-<p>代码质量：eslint</p>
-<p>代码风格：prettier</p>
-<p>Git Commit提交：husky + lint-staged + commitlint</p>
-<h2>开发</h2>
-<p>开发</p>
-<p><code>$ npm run dev</code></p>
-<p>构建代码</p>
-<p><code>$ npm run build</code></p>
-<p>校验 JS</p>
-<p><code>$ npm run lint</code></p>
-<p>登录 npm</p>
-<p><code>$ npm login</code></p>
-<p>发布包</p>
-<p><code>$ npm publish</code></p>
-<h2>使用</h2>
-<p>安装</p>
-<p><code>$ npm install --save @zengbin/web-common</code></p></article>
-    </section>
-
-
 
 
 

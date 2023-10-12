@@ -1,4 +1,9 @@
 /**
+ * dom模块
+ * @module dom
+ * */
+
+/**
  * 添加script
  * @param {string} url js url
  * @param {function} [onload] 加载成功回调

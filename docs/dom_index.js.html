@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>dom/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,56 +37,49 @@
 
 <div id="main">
     
+    <h1 class="page-title">dom/index.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * dom模块
+ * @module dom
+ * */
 
-
-    <section class="package">
-        <h3> </h3>		
+/**
+ * 添加script
+ * @param {string} url js url
+ * @param {function} [onload] 加载成功回调
+ * @param {function} [onerror] 加载失败回调
+ * @return {HTMLElement} script引用
+ */
+export function addScript(url, onload, onerror) {
+	var script = document.createElement('script')
+	if (onload) {
+		script.onload = function () {
+			onload(script)
+		}
+	}
+	script.onerror = function () {
+		if (onerror) {
+			onerror(script)
+		} else if (onload) {
+			onload(script)
+		}
+	}
+	script.src = url
+	document.head.appendChild(script)
+	return script
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><h1>web-common</h1>
-<p>Web前端公共基础 JavaScript 库</p>
-<h2>技术栈</h2>
-<p>模块打包：rollup</p>
-<p>测试：jest</p>
-<p>代码质量：eslint</p>
-<p>代码风格：prettier</p>
-<p>Git Commit提交：husky + lint-staged + commitlint</p>
-<h2>开发</h2>
-<p>开发</p>
-<p><code>$ npm run dev</code></p>
-<p>构建代码</p>
-<p><code>$ npm run build</code></p>
-<p>校验 JS</p>
-<p><code>$ npm run lint</code></p>
-<p>登录 npm</p>
-<p><code>$ npm login</code></p>
-<p>发布包</p>
-<p><code>$ npm publish</code></p>
-<h2>使用</h2>
-<p>安装</p>
-<p><code>$ npm install --save @zengbin/web-common</code></p></article>
-    </section>
-
-
 
 
 
