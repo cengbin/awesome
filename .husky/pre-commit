@@ -1,8 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# PATH="/usr/local/bin:$PATH"
-PATH=$PATH:/usr/local/bin:/usr/local/sbin
-
-
 echo "husky ===> 1. 执行 pre-commit 钩子" && npx lint-staged
