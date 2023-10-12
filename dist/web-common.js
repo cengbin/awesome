@@ -36,7 +36,7 @@
 	 * @param {string} fmt 格式
 	 * @return {String}
 	 */
-	function formatTime(time, fmt = 'yyyy-mm-dd hh:mm:ss') {
+	function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
 		let ret;
 		let date = new Date(time);
 		let opt = {
