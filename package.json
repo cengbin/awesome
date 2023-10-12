@@ -1,16 +1,17 @@
 {
-  "name": "web-common",
+  "name": "@zengbin/web-common",
   "version": "1.0.0",
-  "description": "Web前端公共基础 JavaScript 库",
-  "main": "index.js",
+  "description": "Web前端公共基础 JavaScript 工具库",
+  "main": "dist/web-common.js",
   "scripts": {
-    "dev": "rollup --config rollup.config.js  -w",
+    "dev": "rollup --config scripts/rollup.config.dev.js  -w",
+    "build": "rollup --config scripts/rollup.config.build.js",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
     "generate-docs": "jsdoc -c jsdoc.json",
     "prepare": "husky install"
   },
-  "author": "",
+  "author": "bin.zeng",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
@@ -24,6 +25,7 @@
     "lint-staged": "^12.0.0",
     "prettier": "^3.0.3",
     "rollup": "^1.27.8",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-watch": "^4.3.1"
   },
   "lint-staged": {

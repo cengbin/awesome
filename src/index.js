@@ -1,32 +1,6 @@
-export * from './class'
-export * from './cookies'
-export * from './regexp'
-export * from './url'
-export * from './util'
-
-/**
- * 添加script
- *
- * @param {string} url js url
- * @param {function} [onload] 加载成功回调
- * @param {function} [onerror] 加载失败回调
- * @return {HTMLElement} script引用
- */
-export function addScript(url, onload, onerror) {
-	var script = document.createElement('script')
-	if (onload) {
-		script.onload = function () {
-			onload(script)
-		}
-	}
-	script.onerror = function () {
-		if (onerror) {
-			onerror(script)
-		} else if (onload) {
-			onload(script)
-		}
-	}
-	script.src = url
-	document.head.appendChild(script)
-	return script
-}
+export * from './class/index'
+export * from './cookie/index'
+export * from './dom/index'
+export * from './regexp/index'
+export * from './url/index'
+export * from './util/index'

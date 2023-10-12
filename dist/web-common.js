@@ -15,7 +15,7 @@
 	 * @param {string} className - 类名
 	 * */
 	function addClass(element, className) {
-		var regClassName = new RegExp('(^| )' + className + '( |$)');
+		const regClassName = new RegExp('(^| )' + className + '( |$)');
 		// ( /\s+/ 匹配任何空白符，包括\n,\r,\f,\t,\v等（换行、回车、空格、tab等）})
 		if (!regClassName.test(element.className)) {
 			element.className = element.className.split(/\s+/).concat(className).join(' ');
@@ -28,7 +28,7 @@
 	 * @param {string} className - 类名
 	 * */
 	function removeClass(element, className) {
-		var regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g');
+		const regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g');
 		element.className = element.className.replace(regClassName, '');
 	}
 
@@ -153,6 +153,32 @@
 		var data = new Date();
 		data.setTime(data.valueOf() + time);
 		return data
+	}
+
+	/**
+	 * 添加script
+	 * @param {string} url js url
+	 * @param {function} [onload] 加载成功回调
+	 * @param {function} [onerror] 加载失败回调
+	 * @return {HTMLElement} script引用
+	 */
+	function addScript(url, onload, onerror) {
+		var script = document.createElement('script');
+		if (onload) {
+			script.onload = function () {
+				onload(script);
+			};
+		}
+		script.onerror = function () {
+			if (onerror) {
+				onerror(script);
+			} else if (onload) {
+				onload(script);
+			}
+		};
+		script.src = url;
+		document.head.appendChild(script);
+		return script
 	}
 
 	/**
@@ -288,33 +314,6 @@
 		n = n.toString();
 		return n[1] ? n : `0${n}`
 	};
-
-	/**
-	 * 添加script
-	 *
-	 * @param {string} url js url
-	 * @param {function} [onload] 加载成功回调
-	 * @param {function} [onerror] 加载失败回调
-	 * @return {HTMLElement} script引用
-	 */
-	function addScript(url, onload, onerror) {
-		var script = document.createElement('script');
-		if (onload) {
-			script.onload = function () {
-				onload(script);
-			};
-		}
-		script.onerror = function () {
-			if (onerror) {
-				onerror(script);
-			} else if (onload) {
-				onload(script);
-			}
-		};
-		script.src = url;
-		document.head.appendChild(script);
-		return script
-	}
 
 	exports.addClass = addClass;
 	exports.addScript = addScript;

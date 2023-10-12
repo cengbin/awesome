@@ -9,7 +9,7 @@
  * @param {string} className - 类名
  * */
 export function addClass(element, className) {
-	var regClassName = new RegExp('(^| )' + className + '( |$)')
+	const regClassName = new RegExp('(^| )' + className + '( |$)')
 	// ( /\s+/ 匹配任何空白符，包括\n,\r,\f,\t,\v等（换行、回车、空格、tab等）})
 	if (!regClassName.test(element.className)) {
 		element.className = element.className.split(/\s+/).concat(className).join(' ')
@@ -22,7 +22,7 @@ export function addClass(element, className) {
  * @param {string} className - 类名
  * */
 export function removeClass(element, className) {
-	var regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g')
+	const regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g')
 	element.className = element.className.replace(regClassName, '')
 }
 
