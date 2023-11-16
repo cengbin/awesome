@@ -44,7 +44,7 @@
     "commonNav": true,
     "menu": {
       // Adding additional menu items after Home
-      "Github 源码仓库": {
+      "Github 源码": {
         // Menu item name
         "href": "https://github.com/cengbin/web-utils",
         //the rest of HTML properties to add to manu item
