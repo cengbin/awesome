@@ -1,7 +1,7 @@
 {
-  "name": "web-utils",
+  "name": "web-utils.js",
   "version": "0.0.1",
-  "description": "Web前端公共基础 JavaScript 工具库",
+  "description": "基础 JavaScript 工具库",
   "main": "dist/web-utils.min.js",
   "scripts": {
     "dev": "rollup --config scripts/rollup.config.dev.mjs  -w",
