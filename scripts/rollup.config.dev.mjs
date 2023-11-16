@@ -2,9 +2,9 @@ export default [
 	{
 		input: 'src/index.js',
 		output: {
-			file: 'dist/web-common.js',
+			file: 'dist/web-utils.js',
 			format: 'umd',
-			name: 'common'
+			name: 'utils'
 		}
 	}
 ]

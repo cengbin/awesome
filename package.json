@@ -1,8 +1,8 @@
 {
-  "name": "@zengbin/web-common-tools",
-  "version": "1.0.0",
+  "name": "web-utils",
+  "version": "0.0.1",
   "description": "Web前端公共基础 JavaScript 工具库",
-  "main": "dist/web-common.min.js",
+  "main": "dist/web-utils.min.js",
   "scripts": {
     "dev": "rollup --config scripts/rollup.config.dev.mjs  -w",
     "build": "rollup --config scripts/rollup.config.build.mjs",

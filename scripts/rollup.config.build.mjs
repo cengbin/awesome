@@ -7,13 +7,13 @@ function defineConfig() {
 		let input = `src/`
 		let dist = `dist/`
 		input += fileName === 'index.js' ? fileName : `${fileName}/index.js`
-		dist += fileName === 'index.js' ? 'web-common.min.js' : `web-common.${fileName}.min.js`
+		dist += fileName === 'index.js' ? 'web-utils.min.js' : `web-utils.${fileName}.min.js`
 		return {
 			input: input,
 			output: {
 				file: dist,
 				format: 'umd',
-				name: 'common'
+				name: 'utils'
 			},
 			plugins: [terser()]
 		}
