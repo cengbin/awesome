@@ -44,9 +44,9 @@
     "commonNav": true,
     "menu": {
       // Adding additional menu items after Home
-      "Gitlab 链接": {
+      "Github 源码仓库": {
         // Menu item name
-        "href": "https://github.com/web-frontend-engineering/web-library",
+        "href": "https://github.com/cengbin/web-utils",
         //the rest of HTML properties to add to manu item
         "target": "_blank",
         "class": "menu-item",
