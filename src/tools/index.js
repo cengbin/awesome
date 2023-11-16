@@ -1,6 +1,6 @@
 /**
  * tools 常用的工具函数
- * @module web-common-tools/tools
+ * @module web-utils/tools
  * */
 
 // 类型检测

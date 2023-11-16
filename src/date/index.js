@@ -1,12 +1,16 @@
 /**
  * date 时间处理
- * @module web-common-tools/date
+ * @module web-utils/date
  * */
 
 /**
  * 格式化现在的已过时间
  * @param {Date} startTime
  * @return {String}
+ * @example
+ *
+ * formatPassTime(new Date(2022-01-01 00:00:00)) ===> 1年前
+ * formatPassTime(new Date(2021-21-01 10:00:00)) ===> 2月前
  */
 function formatPassTime(startTime) {
 	let currentTime = Date.parse(new Date()),
@@ -29,6 +33,8 @@ function formatPassTime(startTime) {
  * @param {number} time 时间戳
  * @param {string} fmt 格式
  * @return {String}
+ * @example
+ * formatTime(1700152449834) ===> 2023-11-17 00:34:09
  */
 function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
 	let ret

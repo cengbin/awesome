@@ -1,6 +1,6 @@
 /**
  * dom DOM操作
- * @module web-common-tools/dom
+ * @module web-utils/dom
  * */
 
 /**

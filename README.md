@@ -1,4 +1,4 @@
-# web-common-tools
+# web-utils
 
 公共基础 JavaScript 工具库
 
@@ -45,6 +45,6 @@ Git Commit提交：husky + lint-staged + commitlint
 
 安装
 
-`$ npm install --save @zengbin/web-common-tools`
+`$ npm install --save web-utils.js`
 
 

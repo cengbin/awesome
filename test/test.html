@@ -5,9 +5,13 @@
     <title>测试</title>
   </head>
   <body>
-    <script src="../dist/web-common.js"></script>
+    <script src="../dist/web-utils.min.js"></script>
     <script>
-      console.log(window.common)
+			console.log(window.utils)
+
+			console.blue('蓝色日志', '1', 2, {name: 'chuck', age: 18})
+			console.red('红色日志', '1', 2, {name: 'chuck', age: 18})
+			console.green('绿色日志', '1', 2, {name: 'chuck', age: 18})
     </script>
   </body>
 </html>
