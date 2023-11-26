@@ -25,7 +25,7 @@
 
 **NPM**
 
-`$ npm install --save web-utils.js`
+`$ npm install web-utils.js`
 
 **CDN**
 
@@ -49,13 +49,13 @@ Git Commit提交：husky + lint-staged + commitlint
 
 `$ npm run dev`
 
-#### 打包
-
-`$ npm run build`
-
 校验 JS
 
 `$ npm run lint`
+
+#### 打包
+
+`$ npm run build`
 
 #### 发包
 
