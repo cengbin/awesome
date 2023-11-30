@@ -1,7 +1,7 @@
 import terser from '@rollup/plugin-terser'
 
 function defineConfig() {
-	const entryFiles = ['src/index.js', 'src/date', 'src/dom', 'src/http', 'src/tools']
+	const entryFiles = ['src/index.js', 'src/date', 'src/dom', 'src/tools']
 	const config = entryFiles.map((filePath) => {
 		const fileName = filePath.split('/').pop()
 		let input = `src/`
