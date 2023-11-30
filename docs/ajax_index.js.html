@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>ajax/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,59 +37,85 @@
 
 <div id="main">
     
+    <h1 class="page-title">ajax/index.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * ajax axios二次封装
+ * @module web-utils/http
+ * */
 
+import axios from 'axios'
 
-    <section class="package">
-        <h3> </h3>		
+const instance = axios.create({
+	timeout: 10000,
+	withCredentials: true
+})
+
+function ajax(data) {
+	let { method, url, params, headers = {} } = data
+
+	let config = {
+		url,
+		method,
+		headers: {
+			...headers
+		},
+		params: method === 'get' ? params : null,
+		data: method === 'post' || method === 'put' ? params : null
+	}
+	// console.log(config)
+
+	return instance(config)
+		.then(
+			(value) => {
+				let { data } = value
+				let { code, message } = data
+				if (code !== 20000) {
+					console.error('response :', value, message)
+				}
+				return data
+			},
+			(reason) => {
+				return Promise.reject(reason)
+			}
+		)
+		.finally(() => {})
+}
+
+ajax.get = function (config) {
+	return ajax({ method: 'get', ...config })
+}
+
+ajax.post = function (config) {
+	return ajax({ method: 'post', ...config })
+}
+
+ajax.put = function (config) {
+	return ajax({ method: 'put', ...config })
+}
+
+ajax.upload = function (config) {
+	let { params } = config
+	let formData = new FormData()
+	for (let s in params) {
+		formData.append(s, params[s])
+	}
+
+	return ajax({ method: 'post', ...config, params: formData })
+}
+
+export default ajax
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><h1>web-utils</h1>
-<p>基础 JavaScript 工具库</p>
-<h3>引用方式</h3>
-<p><strong>NPM</strong></p>
-<p><code>$ npm install web-utils.js</code></p>
-<p><strong>CDN</strong></p>
-<p><code>&lt;script src='./dist/web-utils.min.js'&gt;&lt;/script&gt;</code></p>
-<h3>文档</h3>
-<p><a href="https://cengbin.github.io/web-utils">SDK API 文档</a></p>
-<h3>技术栈</h3>
-<p>模块打包：rollup</p>
-<p>文档生成：jsdoc</p>
-<p>测试：jest</p>
-<p>代码质量：eslint</p>
-<p>代码风格：prettier</p>
-<p>Git Commit提交规范：husky + lint-staged + commitlint</p>
-<h3>脚本命令</h3>
-<p>开发 <code>npm run dev</code></p>
-<p>打包 <code>npm run build</code></p>
-<p>单元测试 <code>npm run test</code></p>
-<p>生成文档 <code>npm run generate-docs</code></p>
-<p>校验 JS 代码 <code>npm run lint</code></p>
-<p>代码修复 <code>npm run lint:fix</code></p>
-<p>登录 npm <code>npm login</code></p>
-<p>发布包 <code>npm publish</code></p></article>
-    </section>
-
-
 
 
 

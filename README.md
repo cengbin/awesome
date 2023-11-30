@@ -1,27 +1,8 @@
 # web-utils
 
-## 介绍
+基础 JavaScript 工具库
 
-公共基础 JavaScript 工具库
-
-### 1. 功能模块
-
-* date 时间处理
-* dom DOM操作
-* http axios二次封装
-* tools 常用工具函数
-
-### 2. API文档
-
-[SDK API 文档](https://cengbin.github.io/web-utils)
-
-### 3. 示例
-
-详见源代码`test`目录
-
-## 使用
-
-#### 引用方式
+### 引用方式
 
 **NPM**
 
@@ -29,13 +10,18 @@
 
 **CDN**
 
-待上传
+`<script src='./dist/web-utils.min.js'></script>`
 
-## 开发
+### 文档
 
-#### 技术栈
+[SDK API 文档](https://cengbin.github.io/web-utils)
+
+
+### 技术栈
 
 模块打包：rollup
+
+文档生成：jsdoc
 
 测试：jest
 
@@ -43,26 +29,21 @@
 
 代码风格：prettier
 
-Git Commit提交：husky + lint-staged + commitlint
+Git Commit提交规范：husky + lint-staged + commitlint
 
-#### 开发
+### 脚本命令
+开发 `npm run dev`
 
-`$ npm run dev`
+打包 `npm run build`
 
-校验 JS
+单元测试 `npm run test`
 
-`$ npm run lint`
+生成文档 `npm run generate-docs`
 
-#### 打包
+校验 JS 代码 `npm run lint`
 
-`$ npm run build`
+代码修复 `npm run lint:fix`
 
-#### 发包
+登录 npm `npm login`
 
-登录 npm
-
-`$ npm login`
-
-发布包
-
-`$ npm publish`
+发布包 `npm publish`
