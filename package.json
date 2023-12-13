@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "基础 JavaScript 工具库",
   "main": "dist/web-utils.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cengbin/web-utils.git"
+  },
   "scripts": {
     "dev": "rollup --config scripts/rollup.config.dev.mjs  -w",
     "build": "rollup --config scripts/rollup.config.build.mjs",
@@ -21,6 +25,7 @@
     "@babel/preset-env": "^7.23.2",
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^0.4.4",
     "babel-jest": "^29.7.0",
     "docdash": "^2.0.1",

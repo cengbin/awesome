@@ -12,7 +12,7 @@
  * formatPassTime(new Date(2022-01-01 00:00:00)) ===> 1年前
  * formatPassTime(new Date(2021-21-01 10:00:00)) ===> 2月前
  */
-function formatPassTime(startTime) {
+export function formatPassTime(startTime) {
 	let currentTime = Date.parse(new Date()),
 		time = currentTime - startTime,
 		day = parseInt(time / (1000 * 60 * 60 * 24)),
@@ -36,7 +36,7 @@ function formatPassTime(startTime) {
  * @example
  * formatTime(1700152449834) ===> 2023-11-17 00:34:09
  */
-function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
+export function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
 	let ret
 	let date = new Date(time)
 	let opt = {
@@ -55,10 +55,3 @@ function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
 	}
 	return fmt
 }
-
-const date = {
-	formatPassTime,
-	formatTime
-}
-
-export { date }

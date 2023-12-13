@@ -21,6 +21,10 @@
 
 模块打包：rollup
 
+rollup 文档 https://rollupjs.org
+
+rollup 中文文档 https://cn.rollupjs.org
+
 文档生成：jsdoc
 
 测试：jest
