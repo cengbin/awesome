@@ -48,6 +48,6 @@ Git Commit提交规范：husky + lint-staged + commitlint
 
 代码修复 `npm run lint:fix`
 
-登录 npm `npm login`
+登录 `npm login`
 
 发布包 `npm publish`

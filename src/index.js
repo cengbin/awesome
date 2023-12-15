@@ -12,6 +12,6 @@ import * as date from './date/index'
 import * as dom from './dom/index'
 import * as util from './tools/index'
 
-import Loading from '../components/loading/index'
+import Loading from './components/loading/index'
 
 export { version, date, dom, util, Loading }

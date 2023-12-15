@@ -1,5 +1,5 @@
 {
-  "name": "web-utils.js",
+  "name": "best-common",
   "version": "0.0.1",
   "description": "基础 JavaScript 工具库",
   "main": "dist/web-utils.min.js",
@@ -8,8 +8,8 @@
     "url": "https://github.com/cengbin/web-utils.git"
   },
   "scripts": {
-    "dev": "rollup --config scripts/rollup.config.dev.mjs  -w",
-    "build": "rollup --config scripts/rollup.config.build.mjs",
+    "dev": "rollup --config scripts/rollup.config.dev.cjs  -w",
+    "build": "rollup --config scripts/rollup.config.build.cjs",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
     "generate-docs": "jsdoc -c jsdoc.json",
