@@ -10,7 +10,7 @@ console.log(
 import './console/index'
 import * as date from './date/index'
 import * as dom from './dom/index'
-import * as util from './tools/index'
+import * as util from './util/index'
 import * as regexp from './regexp/index'
 
 import Loading from './components/loading/index'

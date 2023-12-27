@@ -7,6 +7,17 @@ module.exports = [
 		input: 'src/index.js',
 		output: [
 			{
+				file: `dist/${name}.js`,
+				format: 'umd',
+				name: 'BestCommon',
+			},
+			{
+				file: `dist/${name}.min.js`,
+				format: 'umd',
+				name: 'BestCommon',
+				plugins: [terser()]
+			},
+			{
 				file: `dist/${name}-${version}.js`,
 				format: 'umd',
 				name: 'BestCommon',
