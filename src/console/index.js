@@ -1,10 +1,12 @@
 /**
- * console 对console模块的扩展
+ * console模块是对console的扩展
+ * @module console
+ * */
+
+/*
  * 参考：
  * https://github.com/chalk/chalk
  * https://juejin.cn/post/7087192401978064933?searchId=20231116233523CE494AE6E9FA148D7D6F
- *
- * @module web-utils/console
  * */
 
 let colors = ['blue', 'red', 'green']

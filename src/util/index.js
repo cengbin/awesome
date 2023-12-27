@@ -1,6 +1,6 @@
 /**
- * tools 常用的工具函数
- * @module web-utils/tools
+ * 常用工具函数模块
+ * @module util
  * */
 
 /**

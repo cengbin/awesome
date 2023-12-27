@@ -1,6 +1,6 @@
 /**
- * ajax axios二次封装
- * @module web-utils/ajax
+ * ajax模块是对axios的二次封装
+ * @module ajax
  * */
 
 import axios from 'axios'

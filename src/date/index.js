@@ -1,6 +1,6 @@
 /**
- * date 时间处理
- * @module web-utils/date
+ * 时间处理模块
+ * @module date
  * */
 
 /**
