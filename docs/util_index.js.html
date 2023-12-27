@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>console/index.js - Documentation</title>
+    <title>util/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,7 +37,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">console/index.js</h1>
+    <h1 class="page-title">util/index.js</h1>
     
 
     
@@ -48,36 +48,87 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * console模块是对console的扩展
- * @module console
+ * 常用工具函数模块
+ * @module util
  * */
 
-/*
- * 参考：
- * https://github.com/chalk/chalk
- * https://juejin.cn/post/7087192401978064933?searchId=20231116233523CE494AE6E9FA148D7D6F
- * */
-
-let colors = ['blue', 'red', 'green']
-
-colors.forEach((color) => {
-	console[color] = function (...arg) {
-		var logTime = new Date()
-
-		console.log(`${formatTimestamp(logTime)} ===> %c ${arg}`, `background-color:${color};color:white;`)
+/**
+ * 递归 深拷贝
+ * @param data: 拷贝的数据
+ */
+export function deepCopyBy(data) {
+	const t = getType(data)
+	let o
+	if (t === 'array') {
+		o = []
+	} else if (t === 'object') {
+		o = {}
+	} else {
+		return data
 	}
-})
 
-function formatTimestamp(timestamp) {
-	var year = timestamp.getFullYear()
-	var month = ('0' + (timestamp.getMonth() + 1)).slice(-2)
-	var date = timestamp.getDate()
+	if (t === 'array') {
+		for (let i = 0; i &lt; data.length; i++) {
+			o.push(deepCopy(data[i]))
+		}
+	} else if (t === 'object') {
+		for (let i in data) {
+			o[i] = deepCopy(data[i])
+		}
+	}
+	return o
+}
 
-	var h = ('0' + timestamp.getHours()).slice(-2)
-	var m = ('0' + timestamp.getMinutes()).slice(-2)
-	var s = ('0' + timestamp.getSeconds()).slice(-2)
-	var ms = ('00' + timestamp.getMilliseconds()).slice(-3)
-	return '[' + year + '-' + month + '-' + date + ' ' + h + ':' + m + ':' + s + ':' + ms + ']'
+function getType(obj) {
+	return Object.prototype.toString.call(obj).slice(8, -1)
+}
+
+/**
+ * JSON 深拷贝
+ * @param data: 拷贝的数据
+ * @return data Object 复制后生成的对象
+ */
+export function deepCopy(data) {
+	return JSON.parse(JSON.stringify(data))
+}
+
+/**
+ * 将手机号中间部分替换为星号
+ * @param phone{string}: 手机号码
+ */
+export function formatPhone(phone) {
+	return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+}
+
+/**
+ * 防抖
+ * @param func {*}  执行函数
+ * @param wait {*}  防抖时间（毫秒）
+ */
+export function debounce(func, wait) {
+	let id
+	return function (...args) {
+		id &amp;&amp; clearTimeout(id)
+		id = setTimeout(() => {
+			func.apply(this, args)
+		}, wait)
+	}
+}
+
+/**
+ * 节流
+ * @param func {*}  执行函数
+ * @param wait {*}  节流时间（毫秒）
+ */
+export function throttle(func, wait) {
+	let lastTime = Date.now()
+	return function (...args) {
+		let now = Date.now()
+		if (now - lastTime > wait) {
+			lastTime = now
+			func.apply(this, args)
+		}
+	}
 }
 </code></pre>
         </article>

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>web-utils/tools - Documentation</title>
+    <title>best-common/regexp - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,7 +37,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">web-utils/tools</h1>
+    <h1 class="page-title">best-common/regexp</h1>
     
 
     
@@ -60,7 +60,7 @@
         <div class="container-overview">
         
             
-                <div class="description usertext"><p>常用的工具函数模块</p></div>
+                <div class="description usertext"><p>正则模块</p></div>
             
 
             
@@ -72,13 +72,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>常用的工具函数模块</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>正则模块</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_index.js.html">tools/index.js</a>, <a href="tools_index.js.html#line1">line 1</a>
+        <a href="regexp_index.js.html">regexp/index.js</a>, <a href="regexp_index.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -169,7 +169,7 @@
 
     
 
-    <h4 class="name" id=".debounce"><span class="type-signature type-signature-static">(static) </span>debounce<span class="signature">(func, wait)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".isEmail"><span class="type-signature type-signature-static">(static) </span>isEmail<span class="signature">(value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
 
     
 
@@ -179,13 +179,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>防抖</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>检测是否是邮箱</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_index.js.html">tools/index.js</a>, <a href="tools_index.js.html#line59">line 59</a>
+        <a href="regexp_index.js.html">regexp/index.js</a>, <a href="regexp_index.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -257,13 +257,13 @@
 
         <tr>
             
-                <td class="name"><code>func</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">String</span>
 
 
 
@@ -274,160 +274,7 @@
 
             
 
-            <td class="description last"><p>执行函数</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>wait</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>防抖时间（毫秒）</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".deepCopy"><span class="type-signature type-signature-static">(static) </span>deepCopy<span class="signature">(data:)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>JSON 深拷贝</p></li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_index.js.html">tools/index.js</a>, <a href="tools_index.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>data:</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>拷贝的数据</p></td>
+            <td class="description last"><p>检测的值</p></td>
         </tr>
 
     
@@ -453,11 +300,24 @@
 
         
 <div class="param-desc">
-    <p>data Object 复制后生成的对象</p>
+    <p>true|false</p>
 </div>
 
 
 
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+
+    </dd>
+</dl>
+
     
 
 
@@ -467,7 +327,7 @@
 
     
 
-    <h4 class="name" id=".deepCopyBy"><span class="type-signature type-signature-static">(static) </span>deepCopyBy<span class="signature">(data:)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".isIdCard"><span class="type-signature type-signature-static">(static) </span>isIdCard<span class="signature">(value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
 
     
 
@@ -477,13 +337,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>递归 深拷贝</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>检测是否是身份证号</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_index.js.html">tools/index.js</a>, <a href="tools_index.js.html#line10">line 10</a>
+        <a href="regexp_index.js.html">regexp/index.js</a>, <a href="regexp_index.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -555,10 +415,16 @@
 
         <tr>
             
-                <td class="name"><code>data:</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+
             
             </td>
 
@@ -566,7 +432,7 @@
 
             
 
-            <td class="description last"><p>拷贝的数据</p></td>
+            <td class="description last"><p>检测的值</p></td>
         </tr>
 
     
@@ -588,6 +454,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>true|false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -596,7 +485,7 @@
 
     
 
-    <h4 class="name" id=".formatPhone"><span class="type-signature type-signature-static">(static) </span>formatPhone<span class="signature">(phone:)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".isIP"><span class="type-signature type-signature-static">(static) </span>isIP<span class="signature">(value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
 
     
 
@@ -606,13 +495,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>将手机号中间部分替换为星号</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>检测是否是ip地址</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_index.js.html">tools/index.js</a>, <a href="tools_index.js.html#line50">line 50</a>
+        <a href="regexp_index.js.html">regexp/index.js</a>, <a href="regexp_index.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -684,13 +573,13 @@
 
         <tr>
             
-                <td class="name"><code>phone:</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
 
@@ -701,7 +590,7 @@
 
             
 
-            <td class="description last"><p>手机号码</p></td>
+            <td class="description last"><p>检测的值</p></td>
         </tr>
 
     
@@ -723,6 +612,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>true|false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -731,7 +643,7 @@
 
     
 
-    <h4 class="name" id=".throttle"><span class="type-signature type-signature-static">(static) </span>throttle<span class="signature">(func, wait)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".isPhone"><span class="type-signature type-signature-static">(static) </span>isPhone<span class="signature">(value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
 
     
 
@@ -741,13 +653,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>节流</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>检测是否是手机号</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_index.js.html">tools/index.js</a>, <a href="tools_index.js.html#line74">line 74</a>
+        <a href="regexp_index.js.html">regexp/index.js</a>, <a href="regexp_index.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -819,13 +731,13 @@
 
         <tr>
             
-                <td class="name"><code>func</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">String</span>
 
 
 
@@ -836,31 +748,7 @@
 
             
 
-            <td class="description last"><p>执行函数</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>wait</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>节流时间（毫秒）</p></td>
+            <td class="description last"><p>检测的值</p></td>
         </tr>
 
     
@@ -882,6 +770,187 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>true|false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isUrl"><span class="type-signature type-signature-static">(static) </span>isUrl<span class="signature">(value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>检测是否是URL</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="regexp_index.js.html">regexp/index.js</a>, <a href="regexp_index.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>检测的值</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>true|false</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
