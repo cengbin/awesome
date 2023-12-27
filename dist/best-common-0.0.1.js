@@ -100,7 +100,7 @@
   	return fmt
   }
 
-  var index$2 = /*#__PURE__*/Object.freeze({
+  var index$3 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     formatPassTime: formatPassTime,
     formatTime: formatTime
@@ -183,7 +183,7 @@
   	}
   }
 
-  var index$1 = /*#__PURE__*/Object.freeze({
+  var index$2 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     addScript: addScript,
     addClass: addClass,
@@ -196,11 +196,6 @@
    * tools 常用的工具函数
    * @module web-utils/tools
    * */
-
-  // 类型检测
-  function getType(obj) {
-  	return Object.prototype.toString.call(obj).slice(8, -1)
-  }
 
   /**
    * 递归 深拷贝
@@ -229,6 +224,10 @@
   	return o
   }
 
+  function getType(obj) {
+  	return Object.prototype.toString.call(obj).slice(8, -1)
+  }
+
   /**
    * JSON 深拷贝
    * @param data: 拷贝的数据
@@ -236,27 +235,6 @@
    */
   function deepCopy(data) {
   	return JSON.parse(JSON.stringify(data))
-  }
-
-  /**
-   * 根据类型返回正则
-   * @param str{string}: 检测的内容
-   * @param type{string}: 检测类型
-   */
-  function checkType(str, type) {
-  	const regexp = {
-  		ip: /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/.test(str),
-  		port: /^(\d|[1-5]\d{4}|6[1-4]\d{3}|65[1-4]\d{2}|655[1-2]\d|6553[1-5])$/.test(str),
-  		phone: /^1[3|4|5|6|7|8][0-9]{9}$/.test(str), //手机号
-  		number: /^[0-9]+$/.test(str), //是否全数字,
-  		email: /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(str),
-  		IDCard:
-  			/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(
-  				str
-  			),
-  		url: /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(str)
-  	};
-  	return regexp[type]
   }
 
   /**
@@ -270,18 +248,14 @@
   /**
    * 防抖
    * @param func {*}  执行函数
-   * @param wait {*}  节流时间,毫秒
+   * @param wait {*}  防抖时间（毫秒）
    */
   function debounce(func, wait) {
-  	let timeout;
-  	return function () {
-  		let context = this;
-  		let args = arguments;
-
-  		if (timeout) clearTimeout(timeout);
-
-  		timeout = setTimeout(() => {
-  			func.apply(context, args);
+  	let id;
+  	return function (...args) {
+  		id && clearTimeout(id);
+  		id = setTimeout(() => {
+  			func.apply(this, args);
   		}, wait);
   	}
   }
@@ -289,28 +263,66 @@
   /**
    * 节流
    * @param func {*}  执行函数
-   * @param wait {*}  节流时间,毫秒
+   * @param wait {*}  节流时间（毫秒）
    */
   function throttle(func, wait) {
-  	let previous = 0;
-  	return function () {
+  	let lastTime = Date.now();
+  	return function (...args) {
   		let now = Date.now();
-  		let context = this;
-  		if (now - previous > wait) {
-  			func.apply(context, arguments);
-  			previous = now;
+  		if (now - lastTime > wait) {
+  			lastTime = now;
+  			func.apply(this, args);
   		}
   	}
   }
 
-  var index = /*#__PURE__*/Object.freeze({
+  var index$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     deepCopyBy: deepCopyBy,
     deepCopy: deepCopy,
-    checkType: checkType,
     formatPhone: formatPhone,
     debounce: debounce,
     throttle: throttle
+  });
+
+  /**
+   * 检测是否是ip地址
+   * */
+  function isIP(val) {
+  	return /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/.test(val)
+  }
+
+  /**
+   * 检测是否是手机号
+   * */
+  function isPhone(val) {
+  	return /^1[3|4|5|6|7|8][0-9]{9}$/.test(val)
+  }
+
+  /**
+   * 检测是否是邮箱
+   * */
+  function isEmail(val) {
+  	return /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(val)
+  }
+
+  function isIdCard(val) {
+  	return /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(
+  		val
+  	)
+  }
+
+  function isUrl(val) {
+  	return /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(val)
+  }
+
+  var index = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    isIP: isIP,
+    isPhone: isPhone,
+    isEmail: isEmail,
+    isIdCard: isIdCard,
+    isUrl: isUrl
   });
 
   let fullScreenLoading = null;
@@ -369,9 +381,11 @@
   );
 
   exports.Loading = Loading;
-  exports.date = index$2;
-  exports.dom = index$1;
-  exports.util = index;
+  exports.date = index$3;
+  exports.dom = index$2;
+  exports.name = name;
+  exports.regexp = index;
+  exports.util = index$1;
   exports.version = version;
 
 }));
