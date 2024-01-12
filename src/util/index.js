@@ -5,7 +5,7 @@
 
 /**
  * 递归 深拷贝
- * @param data: 拷贝的数据
+ * @param data {Object} 拷贝的数据
  */
 export function deepCopyBy(data) {
 	const t = getType(data)
@@ -30,14 +30,10 @@ export function deepCopyBy(data) {
 	return o
 }
 
-function getType(obj) {
-	return Object.prototype.toString.call(obj).slice(8, -1)
-}
-
 /**
  * JSON 深拷贝
- * @param data: 拷贝的数据
- * @return data Object 复制后生成的对象
+ * @param data {Object} 拷贝的数据
+ * @return data {Object} 复制后生成的对象
  */
 export function deepCopy(data) {
 	return JSON.parse(JSON.stringify(data))
@@ -45,7 +41,7 @@ export function deepCopy(data) {
 
 /**
  * 将手机号中间部分替换为星号
- * @param phone{string}: 手机号码
+ * @param phone {String}: 手机号码
  */
 export function formatPhone(phone) {
 	return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
@@ -53,8 +49,8 @@ export function formatPhone(phone) {
 
 /**
  * 防抖
- * @param func {*}  执行函数
- * @param wait {*}  防抖时间（毫秒）
+ * @param func {Function}  执行函数
+ * @param wait {Number}  防抖时间（毫秒）
  */
 export function debounce(func, wait) {
 	let id
@@ -68,8 +64,8 @@ export function debounce(func, wait) {
 
 /**
  * 节流
- * @param func {*}  执行函数
- * @param wait {*}  节流时间（毫秒）
+ * @param func {Function}  执行函数
+ * @param wait {Number}  节流时间（毫秒）
  */
 export function throttle(func, wait) {
 	let lastTime = Date.now()
@@ -80,4 +76,32 @@ export function throttle(func, wait) {
 			func.apply(this, args)
 		}
 	}
+}
+
+/**
+ * 检测对象是否含有某组属性
+ * @param obj {Object} 检测对象
+ * @param keys {Array} 属性列表
+ * @example
+ * var obj={name:"test",age:18};
+ * hasKey(obj,["name","age"]) // true
+ * hasKey(obj,["name","age","sex"]); // false
+ */
+export function hasKeys(obj, keys) {
+	if (obj instanceof Object && keys instanceof Array) {
+		var ble = false
+		for (var i = 0, n = keys.length; i < n; i++) {
+			if (Object.prototype.hasOwnProperty.call(obj, keys[i])) {
+				ble = true
+			} else {
+				ble = false
+				break
+			}
+		}
+		return ble
+	}
+}
+
+function getType(obj) {
+	return Object.prototype.toString.call(obj).slice(8, -1)
 }
