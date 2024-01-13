@@ -6,7 +6,7 @@
 
 **NPM**
 
-`$ npm install best-common --save -dev`
+`$ npm install best-common --save`
 
 **CDN**
 
@@ -14,7 +14,7 @@
 
 ### 文档
 
-[SDK API 文档](https://cengbin.github.io/best-common/)
+[SDK 在线文档](https://cengbin.github.io/best-common/)
 
 
 ### 技术栈

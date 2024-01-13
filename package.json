@@ -1,7 +1,7 @@
 {
   "name": "best-common",
-  "version": "0.0.1",
-  "description": "基础 JavaScript 工具库",
+  "version": "0.0.2",
+  "description": "JavaScript SDK",
   "keywords": "modules, util",
   "homepage": "https://cengbin.github.io/best-common/",
   "main": "dist/best-common.min.js",
