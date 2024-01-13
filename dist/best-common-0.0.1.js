@@ -22,26 +22,25 @@
    * https://juejin.cn/post/7087192401978064933?searchId=20231116233523CE494AE6E9FA148D7D6F
    * */
 
-  let colors = ['blue', 'red', 'green'];
-
-  colors.forEach((color) => {
-  	console[color] = function (...arg) {
-  		var logTime = new Date();
-
-  		console.log(`${formatTimestamp(logTime)} ===> %c ${arg}`, `background-color:${color};color:white;`);
-  	};
+  var colors = ['blue', 'red', 'green'];
+  colors.forEach(function (color) {
+    console[color] = function () {
+      var logTime = new Date();
+      for (var _len = arguments.length, arg = new Array(_len), _key = 0; _key < _len; _key++) {
+        arg[_key] = arguments[_key];
+      }
+      console.log("".concat(formatTimestamp(logTime), " ===> %c ").concat(arg), "background-color:".concat(color, ";color:white;"));
+    };
   });
-
   function formatTimestamp(timestamp) {
-  	var year = timestamp.getFullYear();
-  	var month = ('0' + (timestamp.getMonth() + 1)).slice(-2);
-  	var date = timestamp.getDate();
-
-  	var h = ('0' + timestamp.getHours()).slice(-2);
-  	var m = ('0' + timestamp.getMinutes()).slice(-2);
-  	var s = ('0' + timestamp.getSeconds()).slice(-2);
-  	var ms = ('00' + timestamp.getMilliseconds()).slice(-3);
-  	return '[' + year + '-' + month + '-' + date + ' ' + h + ':' + m + ':' + s + ':' + ms + ']'
+    var year = timestamp.getFullYear();
+    var month = ('0' + (timestamp.getMonth() + 1)).slice(-2);
+    var date = timestamp.getDate();
+    var h = ('0' + timestamp.getHours()).slice(-2);
+    var m = ('0' + timestamp.getMinutes()).slice(-2);
+    var s = ('0' + timestamp.getSeconds()).slice(-2);
+    var ms = ('00' + timestamp.getMilliseconds()).slice(-3);
+    return '[' + year + '-' + month + '-' + date + ' ' + h + ':' + m + ':' + s + ':' + ms + ']';
   }
 
   /**
@@ -59,19 +58,18 @@
    * formatPassTime(new Date(2021-21-01 10:00:00)) ===> 2月前
    */
   function formatPassTime(startTime) {
-  	let currentTime = Date.parse(new Date()),
-  		time = currentTime - startTime,
-  		day = parseInt(time / (1000 * 60 * 60 * 24)),
-  		hour = parseInt(time / (1000 * 60 * 60)),
-  		min = parseInt(time / (1000 * 60)),
-  		month = parseInt(day / 30),
-  		year = parseInt(month / 12);
-  	if (year) return year + '年前'
-  	if (month) return month + '个月前'
-  	if (day) return day + '天前'
-  	if (hour) return hour + '小时前'
-  	if (min) return min + '分钟前'
-  	else return '刚刚'
+    var currentTime = Date.parse(new Date()),
+      time = currentTime - startTime,
+      day = parseInt(time / (1000 * 60 * 60 * 24)),
+      hour = parseInt(time / (1000 * 60 * 60)),
+      min = parseInt(time / (1000 * 60)),
+      month = parseInt(day / 30),
+      year = parseInt(month / 12);
+    if (year) return year + '年前';
+    if (month) return month + '个月前';
+    if (day) return day + '天前';
+    if (hour) return hour + '小时前';
+    if (min) return min + '分钟前';else return '刚刚';
   }
 
   /**
@@ -82,24 +80,30 @@
    * @example
    * formatTime(1700152449834) ===> 2023-11-17 00:34:09
    */
-  function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
-  	let ret;
-  	let date = new Date(time);
-  	let opt = {
-  		'y+': date.getFullYear().toString(),
-  		'M+': (date.getMonth() + 1).toString(), //月份
-  		'd+': date.getDate().toString(), //日
-  		'h+': date.getHours().toString(), //小时
-  		'm+': date.getMinutes().toString(), //分
-  		's+': date.getSeconds().toString() //秒
-  	};
-  	for (let k in opt) {
-  		ret = new RegExp('(' + k + ')').exec(fmt);
-  		if (ret) {
-  			fmt = fmt.replace(ret[1], ret[1].length === 1 ? opt[k] : opt[k].padStart(ret[1].length, '0'));
-  		}
-  	}
-  	return fmt
+  function formatTime(time) {
+    var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd hh:mm:ss';
+    var ret;
+    var date = new Date(time);
+    var opt = {
+      'y+': date.getFullYear().toString(),
+      'M+': (date.getMonth() + 1).toString(),
+      //月份
+      'd+': date.getDate().toString(),
+      //日
+      'h+': date.getHours().toString(),
+      //小时
+      'm+': date.getMinutes().toString(),
+      //分
+      's+': date.getSeconds().toString() //秒
+    };
+
+    for (var k in opt) {
+      ret = new RegExp('(' + k + ')').exec(fmt);
+      if (ret) {
+        fmt = fmt.replace(ret[1], ret[1].length === 1 ? opt[k] : opt[k].padStart(ret[1].length, '0'));
+      }
+    }
+    return fmt;
   }
 
   var index$3 = /*#__PURE__*/Object.freeze({
@@ -121,22 +125,22 @@
    * @return {HTMLElement} script引用
    */
   function addScript(url, onload, onerror) {
-  	var script = document.createElement('script');
-  	if (onload) {
-  		script.onload = function () {
-  			onload(script);
-  		};
-  	}
-  	script.onerror = function () {
-  		if (onerror) {
-  			onerror(script);
-  		} else if (onload) {
-  			onload(script);
-  		}
-  	};
-  	script.src = url;
-  	document.head.appendChild(script);
-  	return script
+    var script = document.createElement('script');
+    if (onload) {
+      script.onload = function () {
+        onload(script);
+      };
+    }
+    script.onerror = function () {
+      if (onerror) {
+        onerror(script);
+      } else if (onload) {
+        onload(script);
+      }
+    };
+    script.src = url;
+    document.head.appendChild(script);
+    return script;
   }
 
   /**
@@ -145,11 +149,11 @@
    * @param {string} className - 类名
    * */
   function addClass(element, className) {
-  	const regClassName = new RegExp('(^| )' + className + '( |$)');
-  	// ( /\s+/ 匹配任何空白符，包括\n,\r,\f,\t,\v等（换行、回车、空格、tab等）})
-  	if (!regClassName.test(element.className)) {
-  		element.className = element.className.split(/\s+/).concat(className).join(' ');
-  	}
+    var regClassName = new RegExp('(^| )' + className + '( |$)');
+    // ( /\s+/ 匹配任何空白符，包括\n,\r,\f,\t,\v等（换行、回车、空格、tab等）})
+    if (!regClassName.test(element.className)) {
+      element.className = element.className.split(/\s+/).concat(className).join(' ');
+    }
   }
 
   /**
@@ -158,8 +162,8 @@
    * @param {string} className - 类名
    * */
   function removeClass(element, className) {
-  	const regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g');
-  	element.className = element.className.replace(regClassName, '');
+    var regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g');
+    element.className = element.className.replace(regClassName, '');
   }
 
   /**
@@ -169,7 +173,7 @@
    * @return {Boolean} 判断后的值
    * */
   function hasClass(element, className) {
-  	return element.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+    return element.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
   }
 
   /**
@@ -178,11 +182,11 @@
    * @param {string} className - 类名
    * */
   function toggleClass(element, className) {
-  	if (hasClass(element, className)) {
-  		removeClass(element, className);
-  	} else {
-  		addClass(element, className);
-  	}
+    if (hasClass(element, className)) {
+      removeClass(element, className);
+    } else {
+      addClass(element, className);
+    }
   }
 
   var index$2 = /*#__PURE__*/Object.freeze({
@@ -201,81 +205,110 @@
 
   /**
    * 递归 深拷贝
-   * @param data: 拷贝的数据
+   * @param data {Object} 拷贝的数据
    */
   function deepCopyBy(data) {
-  	const t = getType(data);
-  	let o;
-  	if (t === 'array') {
-  		o = [];
-  	} else if (t === 'object') {
-  		o = {};
-  	} else {
-  		return data
-  	}
-
-  	if (t === 'array') {
-  		for (let i = 0; i < data.length; i++) {
-  			o.push(deepCopy(data[i]));
-  		}
-  	} else if (t === 'object') {
-  		for (let i in data) {
-  			o[i] = deepCopy(data[i]);
-  		}
-  	}
-  	return o
-  }
-
-  function getType(obj) {
-  	return Object.prototype.toString.call(obj).slice(8, -1)
+    var t = getType(data);
+    var o;
+    if (t === 'array') {
+      o = [];
+    } else if (t === 'object') {
+      o = {};
+    } else {
+      return data;
+    }
+    if (t === 'array') {
+      for (var i = 0; i < data.length; i++) {
+        o.push(deepCopy(data[i]));
+      }
+    } else if (t === 'object') {
+      for (var _i in data) {
+        o[_i] = deepCopy(data[_i]);
+      }
+    }
+    return o;
   }
 
   /**
    * JSON 深拷贝
-   * @param data: 拷贝的数据
-   * @return data Object 复制后生成的对象
+   * @param data {Object} 拷贝的数据
+   * @return data {Object} 复制后生成的对象
    */
   function deepCopy(data) {
-  	return JSON.parse(JSON.stringify(data))
+    return JSON.parse(JSON.stringify(data));
   }
 
   /**
    * 将手机号中间部分替换为星号
-   * @param phone{string}: 手机号码
+   * @param phone {String}: 手机号码
    */
   function formatPhone(phone) {
-  	return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+    return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
   }
 
   /**
    * 防抖
-   * @param func {*}  执行函数
-   * @param wait {*}  防抖时间（毫秒）
+   * @param func {Function}  执行函数
+   * @param wait {Number}  防抖时间（毫秒）
    */
   function debounce(func, wait) {
-  	let id;
-  	return function (...args) {
-  		id && clearTimeout(id);
-  		id = setTimeout(() => {
-  			func.apply(this, args);
-  		}, wait);
-  	}
+    var id;
+    return function () {
+      var _this = this;
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+      id && clearTimeout(id);
+      id = setTimeout(function () {
+        func.apply(_this, args);
+      }, wait);
+    };
   }
 
   /**
    * 节流
-   * @param func {*}  执行函数
-   * @param wait {*}  节流时间（毫秒）
+   * @param func {Function}  执行函数
+   * @param wait {Number}  节流时间（毫秒）
    */
   function throttle(func, wait) {
-  	let lastTime = Date.now();
-  	return function (...args) {
-  		let now = Date.now();
-  		if (now - lastTime > wait) {
-  			lastTime = now;
-  			func.apply(this, args);
-  		}
-  	}
+    var lastTime = Date.now();
+    return function () {
+      var now = Date.now();
+      if (now - lastTime > wait) {
+        lastTime = now;
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+        func.apply(this, args);
+      }
+    };
+  }
+
+  /**
+   * 检测对象是否含有某组属性
+   * @param obj {Object} 检测对象
+   * @param keys {Array} 属性列表
+   * @example
+   * var obj={name:"test",age:18};
+   * hasKey(obj,["name","age"]) // true
+   * hasKey(obj,["name","age","sex"]); // false
+   */
+  function hasKeys(obj, keys) {
+    if (obj instanceof Object && keys instanceof Array) {
+      var ble = false;
+      for (var i = 0, n = keys.length; i < n; i++) {
+        if (Object.prototype.hasOwnProperty.call(obj, keys[i])) {
+          ble = true;
+        } else {
+          ble = false;
+          break;
+        }
+      }
+      return ble;
+    }
+  }
+  function getType(obj) {
+    return Object.prototype.toString.call(obj).slice(8, -1);
   }
 
   var index$1 = /*#__PURE__*/Object.freeze({
@@ -284,7 +317,8 @@
     deepCopy: deepCopy,
     formatPhone: formatPhone,
     debounce: debounce,
-    throttle: throttle
+    throttle: throttle,
+    hasKeys: hasKeys
   });
 
   /**
@@ -298,7 +332,7 @@
    * @return {Boolean} true|false
    * */
   function isIP(val) {
-  	return /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/.test(val)
+    return /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/.test(val);
   }
 
   /**
@@ -307,7 +341,7 @@
    * @return {Boolean} true|false
    * */
   function isPhone(val) {
-  	return /^1[3|4|5|6|7|8][0-9]{9}$/.test(val)
+    return /^1[3|4|5|6|7|8][0-9]{9}$/.test(val);
   }
 
   /**
@@ -316,7 +350,7 @@
    * @return {Boolean} true|false
    * */
   function isEmail(val) {
-  	return /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(val)
+    return /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/.test(val);
   }
 
   /**
@@ -325,9 +359,7 @@
    * @return {Boolean} true|false
    * */
   function isIdCard(val) {
-  	return /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(
-  		val
-  	)
+    return /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(val);
   }
 
   /**
@@ -336,7 +368,7 @@
    * @return {Boolean} true|false
    * */
   function isUrl(val) {
-  	return /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(val)
+    return /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(val);
   }
 
   var index = /*#__PURE__*/Object.freeze({
@@ -348,60 +380,49 @@
     isUrl: isUrl
   });
 
-  let fullScreenLoading = null;
-
-  const Loading = function () {
-  	if (fullScreenLoading) {
-  		return fullScreenLoading
-  	}
-
-  	let instance = {
-  		showing: false,
-  		el: null,
-  		init() {
-  			let loadingEle = document.createElement('div');
-  			loadingEle.setAttribute('id', 'loading');
-
-  			let span = document.createElement('div');
-  			span.innerText = 'loading...';
-  			span.setAttribute('class', 'text');
-  			loadingEle.appendChild(span);
-
-  			this.el = loadingEle;
-  		},
-  		setText(text) {
-  			let span = this.el.querySelector('.text');
-  			span.innerText = text || 'loading...';
-  			return this
-  		},
-  		show() {
-  			if (!this.showing) {
-  				this.showing = true;
-  				document.body.appendChild(this.el);
-  			}
-  			return this
-  		},
-  		hide() {
-  			if (this.showing) {
-  				this.showing = false;
-  				document.body.removeChild(this.el);
-  			}
-  			return this
-  		}
-  	};
-  	instance.init();
-
-  	fullScreenLoading = instance;
-
-  	return instance
+  var fullScreenLoading = null;
+  var Loading = function Loading() {
+    if (fullScreenLoading) {
+      return fullScreenLoading;
+    }
+    var instance = {
+      showing: false,
+      el: null,
+      init: function init() {
+        var loadingEle = document.createElement('div');
+        loadingEle.setAttribute('id', 'loading');
+        var span = document.createElement('div');
+        span.innerText = 'loading...';
+        span.setAttribute('class', 'text');
+        loadingEle.appendChild(span);
+        this.el = loadingEle;
+      },
+      setText: function setText(text) {
+        var span = this.el.querySelector('.text');
+        span.innerText = text || 'loading...';
+        return this;
+      },
+      show: function show() {
+        if (!this.showing) {
+          this.showing = true;
+          document.body.appendChild(this.el);
+        }
+        return this;
+      },
+      hide: function hide() {
+        if (this.showing) {
+          this.showing = false;
+          document.body.removeChild(this.el);
+        }
+        return this;
+      }
+    };
+    instance.init();
+    fullScreenLoading = instance;
+    return instance;
   };
 
-  console.log(
-  	`%c ${name} %c v${version} %c ${repository.url}`,
-  	'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060; font-weight: bold;',
-  	'padding: 2px 1px; border-radius: 0 0 0 0; color: #fff; background: #42c02e; font-weight: bold;',
-  	'padding: 2px 2px 2px 2px; border-radius: 0 3px 3px 0; color: #fff; background: #ffc3dc; font-weight: bold;'
-  );
+  console.log("%c ".concat(name, " %c v").concat(version, " %c ").concat(repository.url), 'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060; font-weight: bold;', 'padding: 2px 1px; border-radius: 0 0 0 0; color: #fff; background: #42c02e; font-weight: bold;', 'padding: 2px 2px 2px 2px; border-radius: 0 3px 3px 0; color: #fff; background: #ffc3dc; font-weight: bold;');
 
   exports.Loading = Loading;
   exports.date = index$3;
