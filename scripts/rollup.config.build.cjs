@@ -1,6 +1,7 @@
 const json = require('@rollup/plugin-json')
 const terser = require('@rollup/plugin-terser')
-const {name,version} = require('../package.json')
+const {babel} = require("@rollup/plugin-babel")
+const {name, version} = require('../package.json')
 
 module.exports = [
 	{
@@ -30,7 +31,11 @@ module.exports = [
 			}
 		],
 		plugins: [
-			json()
+			babel({
+				babelHelpers: "bundled",
+				exclude: /node_modules/
+			}),
+			json(),
 		]
 	}
 ]

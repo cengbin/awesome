@@ -2,7 +2,13 @@
   "name": "best-common",
   "version": "0.0.1",
   "description": "基础 JavaScript 工具库",
+  "keywords": "modules, util",
+  "homepage": "https://cengbin.github.io/best-common/",
   "main": "dist/best-common.min.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/cengbin/best-common.git"
@@ -25,6 +31,7 @@
     "@babel/preset-env": "^7.23.2",
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^0.4.4",
     "babel-jest": "^29.7.0",

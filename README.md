@@ -1,20 +1,20 @@
-# web-utils
+# best-common
 
-基础 JavaScript 工具库
+一个 JavaScript SDK 库
 
 ### 引用方式
 
 **NPM**
 
-`$ npm install web-utils.js`
+`$ npm install best-common --save -dev`
 
 **CDN**
 
-`<script src='./dist/web-utils.min.js'></script>`
+`<script src='./dist/best-common.min.js'></script>`
 
 ### 文档
 
-[SDK API 文档](https://cengbin.github.io/web-utils)
+[SDK API 文档](https://cengbin.github.io/best-common/)
 
 
 ### 技术栈
