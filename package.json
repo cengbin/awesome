@@ -15,10 +15,10 @@
   },
   "scripts": {
     "dev": "rollup --config scripts/rollup.config.dev.cjs  -w",
-    "build": "rollup --config scripts/rollup.config.build.cjs",
+    "build:sdk": "rollup --config scripts/rollup.config.build.cjs",
+    "build:docs": "jsdoc -c jsdoc.json",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
-    "generate-docs": "jsdoc -c jsdoc.json",
     "prepare": "husky install",
     "test": "jest --config scripts/jest.config.js"
   },
