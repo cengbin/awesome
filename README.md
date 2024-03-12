@@ -1,4 +1,4 @@
-# best-common
+# awesome-common
 
 一个 JavaScript SDK 库
 
@@ -6,15 +6,15 @@
 
 **NPM**
 
-`$ npm install best-common --save`
+`$ npm install awesome-common --save`
 
 **CDN**
 
-`<script src='./dist/best-common.min.js'></script>`
+`<script src='./dist/awesome-common.min.js'></script>`
 
 ### 文档
 
-[SDK 在线文档](https://cengbin.github.io/best-common/)
+[SDK 在线文档](https://cengbin.github.io/awesome-common/)
 
 
 ### 技术栈

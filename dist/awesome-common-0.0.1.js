@@ -4,11 +4,11 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.BestCommon = {}));
 })(this, (function (exports) { 'use strict';
 
-  var name = "best-common";
+  var name = "awesome-common";
   var version = "0.0.1";
   var repository = {
   	type: "git",
-  	url: "https://github.com/cengbin/best-common.git"
+  	url: "https://github.com/cengbin/awesome-common.git"
   };
 
   /**
@@ -307,6 +307,26 @@
       return ble;
     }
   }
+
+  /**
+   * 格式化字符串成数字，保留2位小数
+   * @param value 格式化的字符串
+   * */
+  function getNum(value) {
+    value = value.toString();
+    // 只能输入"数字"和"."
+    value = value.replace(/[^\d.]/g, '');
+    // 第一位字符不能为"."
+    value = value.replace(/^\./g, '');
+    // 只能输入一个小数点且只保留一个
+    value = value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
+    // 只能输入1位小数
+    // value = value.replace(/^(\-)*(\d+)\.(\d).*$/, "$1$2.$3");
+    // 只能输入两个小数
+    // eslint-disable-next-line
+    value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+    return value;
+  }
   function getType(obj) {
     return Object.prototype.toString.call(obj).slice(8, -1);
   }
@@ -318,7 +338,8 @@
     formatPhone: formatPhone,
     debounce: debounce,
     throttle: throttle,
-    hasKeys: hasKeys
+    hasKeys: hasKeys,
+    getNum: getNum
   });
 
   /**

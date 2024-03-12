@@ -1,17 +1,17 @@
 {
-  "name": "best-common",
-  "version": "0.0.2",
+  "name": "awesome-common",
+  "version": "0.0.1",
   "description": "JavaScript SDK",
   "keywords": "modules, util",
-  "homepage": "https://cengbin.github.io/best-common/",
-  "main": "dist/best-common.min.js",
+  "homepage": "https://cengbin.github.io/awesome-common/",
+  "main": "dist/awesome-common.min.js",
   "files": [
     "dist",
     "src"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cengbin/best-common.git"
+    "url": "https://github.com/cengbin/awesome-common.git"
   },
   "scripts": {
     "dev": "rollup --config scripts/rollup.config.dev.cjs  -w",

@@ -4,9 +4,9 @@ module.exports = [
 	{
 		input: 'src/index.js',
 		output: {
-			file: `dist/best-common.js`,
+			file: `dist/awesome-common.js`,
 			format: 'umd',
-			name: 'BestCommon'
+			name: 'AwesomeCommon'
 		},
 		plugins: [json()]
 	}
