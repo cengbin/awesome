@@ -14,12 +14,12 @@ module.exports = {
 		$: true,
 		jQuery: true,
 	},
+  extends: ['eslint:recommended', 'prettier'],
 	parser: "@babel/eslint-parser",
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module'
 	},
-	extends: ['eslint:recommended', 'prettier'],
 	plugins: ['prettier'],
 	rules: {
 		'prettier/prettier': 'error'
