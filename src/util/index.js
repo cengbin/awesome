@@ -107,18 +107,19 @@ export function hasKeys(obj, keys) {
  * @param value 格式化的字符串
  * */
 export function getNum(value) {
-	value = value.toString();
+	value = value.toString()
 	// 只能输入"数字"和"."
-	value = value.replace(/[^\d.]/g, "");
+	value = value.replace(/[^\d.]/g, '')
 	// 第一位字符不能为"."
-	value = value.replace(/^\./g, "");
+	value = value.replace(/^\./g, '')
 	// 只能输入一个小数点且只保留一个
-	value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+	value = value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
 	// 只能输入1位小数
 	// value = value.replace(/^(\-)*(\d+)\.(\d).*$/, "$1$2.$3");
 	// 只能输入两个小数
-	value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
-	return value;
+	// eslint-disable-next-line
+	value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3')
+	return value
 }
 
 function getType(obj) {
