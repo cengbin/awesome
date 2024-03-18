@@ -41,11 +41,11 @@ export function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
 	let date = new Date(time)
 	let opt = {
 		'y+': date.getFullYear().toString(),
-		'M+': (date.getMonth() + 1).toString(), //月份
-		'd+': date.getDate().toString(), //日
-		'h+': date.getHours().toString(), //小时
-		'm+': date.getMinutes().toString(), //分
-		's+': date.getSeconds().toString() //秒
+		'M+': (date.getMonth() + 1).toString(), // 月份
+		'd+': date.getDate().toString(), // 日
+		'h+': date.getHours().toString(), // 小时
+		'm+': date.getMinutes().toString(), // 分
+		's+': date.getSeconds().toString() // 秒
 	}
 	for (let k in opt) {
 		ret = new RegExp('(' + k + ')').exec(fmt)

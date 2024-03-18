@@ -5,7 +5,7 @@ module.exports = {
 		node: true,
 		commonjs: true,
 		es6: true,
-		jest:true,
+		jest: true,
 	},
 	globals: {
 		// browser
@@ -14,14 +14,15 @@ module.exports = {
 		$: true,
 		jQuery: true,
 	},
-  extends: ['eslint:recommended', 'prettier'],
 	parser: "@babel/eslint-parser",
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module'
 	},
+	extends: ['eslint:recommended', 'prettier'],
 	plugins: ['prettier'],
 	rules: {
-		'prettier/prettier': 'error'
+		'prettier/prettier': 'error',
+		'spaced-comment': 'error'
 	}
 }
