@@ -1,0 +1,18 @@
+@import "mixins/clearfix";
+@import "mixins/ellipsis";
+
+.awe-clearfix {
+  @include clearfix();
+}
+
+.awe-ellipsis {
+  @include ellipsis();
+}
+
+.awe-ellipsis-l2 {
+  @include multi-ellipsis(2);
+}
+
+.awe-ellipsis-l3 {
+  @include multi-ellipsis(3);
+}

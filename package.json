@@ -17,8 +17,8 @@
     "dev": "rollup --config scripts/rollup.config.dev.cjs  -w",
     "build:lib": "rollup --config scripts/rollup.config.build.cjs",
     "build:doc": "jsdoc -c jsdoc.json",
-    "lint": "npx eslint src",
-    "lint:fix": "npx eslint src --fix",
+    "eslint": "npx eslint src",
+    "eslint:fix": "npx eslint src --fix",
     "prepare": "husky install",
     "test": "jest --config scripts/jest.config.js"
   },
