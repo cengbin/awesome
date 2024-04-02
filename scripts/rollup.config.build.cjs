@@ -10,23 +10,23 @@ module.exports = [
 			{
 				file: `dist/${name}.js`,
 				format: 'umd',
-				name: 'BestCommon',
+				name: 'Common',
 			},
 			{
 				file: `dist/${name}.min.js`,
 				format: 'umd',
-				name: 'BestCommon',
+				name: 'Common',
 				plugins: [terser()]
 			},
 			{
 				file: `dist/${name}-${version}.js`,
 				format: 'umd',
-				name: 'BestCommon',
+				name: 'Common',
 			},
 			{
 				file: `dist/${name}-${version}.min.js`,
 				format: 'umd',
-				name: 'BestCommon',
+				name: 'Common',
 				plugins: [terser()]
 			}
 		],

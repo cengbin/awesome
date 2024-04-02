@@ -15,4 +15,12 @@ import * as regexp from './regexp/index'
 
 import Loading from './components/loading/index'
 
-export { version, name, date, dom, util, regexp, Loading }
+export default {
+	version,
+	name,
+	date,
+	dom,
+	util,
+	regexp,
+	Loading
+}
