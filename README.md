@@ -1,6 +1,6 @@
 # awesome-common
 
-一个 JavaScript SDK
+JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）。
 
 ### 引用方式
 
@@ -8,14 +8,13 @@
 
 `$ npm install awesome-common --save`
 
-**CDN**
+**script**
 
 `<script src='./dist/awesome-common.min.js'></script>`
 
-### 文档
+### 使用文档
 
 [SDK 在线文档](https://cengbin.github.io/awesome-common/)
-
 
 ### 技术栈
 

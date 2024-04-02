@@ -32,7 +32,7 @@
   function formatTimestamp(timestamp) {
     var year = timestamp.getFullYear();
     var month = ('0' + (timestamp.getMonth() + 1)).slice(-2);
-    var date = timestamp.getDate();
+    var date = ('0' + timestamp.getDate()).slice(-2);
     var h = ('0' + timestamp.getHours()).slice(-2);
     var m = ('0' + timestamp.getMinutes()).slice(-2);
     var s = ('0' + timestamp.getSeconds()).slice(-2);

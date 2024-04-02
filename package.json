@@ -1,8 +1,8 @@
 {
   "name": "awesome-common",
-  "version": "0.0.1",
-  "description": "JavaScript SDK",
-  "keywords": "modules, util",
+  "version": "0.0.2",
+  "description": "JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）",
+  "keywords": "SDK, util, cookie, regexp",
   "homepage": "https://cengbin.github.io/awesome-common",
   "main": "dist/awesome-common.min.js",
   "files": [
