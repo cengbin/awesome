@@ -1,15 +1,12 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.BestCommon = {}));
-})(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Common = factory());
+})(this, (function () { 'use strict';
 
   var name = "awesome-common";
   var version = "0.0.1";
-  var repository = {
-  	type: "git",
-  	url: "https://github.com/cengbin/awesome-common.git"
-  };
+  var homepage = "https://cengbin.github.io/awesome-common";
 
   /**
    * console模块是对console的扩展
@@ -42,161 +39,6 @@
     var ms = ('00' + timestamp.getMilliseconds()).slice(-3);
     return '[' + year + '-' + month + '-' + date + ' ' + h + ':' + m + ':' + s + ':' + ms + ']';
   }
-
-  /**
-   * 时间处理模块
-   * @module date
-   * */
-
-  /**
-   * 格式化现在的已过时间
-   * @param {Date} startTime
-   * @return {String}
-   * @example
-   *
-   * formatPassTime(new Date(2022-01-01 00:00:00)) ===> 1年前
-   * formatPassTime(new Date(2021-21-01 10:00:00)) ===> 2月前
-   */
-  function formatPassTime(startTime) {
-    var currentTime = Date.parse(new Date()),
-      time = currentTime - startTime,
-      day = parseInt(time / (1000 * 60 * 60 * 24)),
-      hour = parseInt(time / (1000 * 60 * 60)),
-      min = parseInt(time / (1000 * 60)),
-      month = parseInt(day / 30),
-      year = parseInt(month / 12);
-    if (year) return year + '年前';
-    if (month) return month + '个月前';
-    if (day) return day + '天前';
-    if (hour) return hour + '小时前';
-    if (min) return min + '分钟前';else return '刚刚';
-  }
-
-  /**
-   * 格式化时间戳
-   * @param {number} time 时间戳
-   * @param {string} fmt 格式
-   * @return {String}
-   * @example
-   * formatTime(1700152449834) ===> 2023-11-17 00:34:09
-   */
-  function formatTime(time) {
-    var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd hh:mm:ss';
-    var ret;
-    var date = new Date(time);
-    var opt = {
-      'y+': date.getFullYear().toString(),
-      'M+': (date.getMonth() + 1).toString(),
-      //月份
-      'd+': date.getDate().toString(),
-      //日
-      'h+': date.getHours().toString(),
-      //小时
-      'm+': date.getMinutes().toString(),
-      //分
-      's+': date.getSeconds().toString() //秒
-    };
-
-    for (var k in opt) {
-      ret = new RegExp('(' + k + ')').exec(fmt);
-      if (ret) {
-        fmt = fmt.replace(ret[1], ret[1].length === 1 ? opt[k] : opt[k].padStart(ret[1].length, '0'));
-      }
-    }
-    return fmt;
-  }
-
-  var index$3 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    formatPassTime: formatPassTime,
-    formatTime: formatTime
-  });
-
-  /**
-   * DOM 操作模块
-   * @module dom
-   * */
-
-  /**
-   * 添加script
-   * @param {string} url js url
-   * @param {function} [onload] 加载成功回调
-   * @param {function} [onerror] 加载失败回调
-   * @return {HTMLElement} script引用
-   */
-  function addScript(url, onload, onerror) {
-    var script = document.createElement('script');
-    if (onload) {
-      script.onload = function () {
-        onload(script);
-      };
-    }
-    script.onerror = function () {
-      if (onerror) {
-        onerror(script);
-      } else if (onload) {
-        onload(script);
-      }
-    };
-    script.src = url;
-    document.head.appendChild(script);
-    return script;
-  }
-
-  /**
-   * DOM添加类
-   * @param {HTMLElement} element - DOM元素
-   * @param {string} className - 类名
-   * */
-  function addClass(element, className) {
-    var regClassName = new RegExp('(^| )' + className + '( |$)');
-    // ( /\s+/ 匹配任何空白符，包括\n,\r,\f,\t,\v等（换行、回车、空格、tab等）})
-    if (!regClassName.test(element.className)) {
-      element.className = element.className.split(/\s+/).concat(className).join(' ');
-    }
-  }
-
-  /**
-   * DOM删除类
-   * @param {HTMLElement} element - DOM元素
-   * @param {string} className - 类名
-   * */
-  function removeClass(element, className) {
-    var regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g');
-    element.className = element.className.replace(regClassName, '');
-  }
-
-  /**
-   * 判断DOM是否有某个类名
-   * @param {HTMLElement} element - DOM元素
-   * @param {string} className - 类名
-   * @return {Boolean} 判断后的值
-   * */
-  function hasClass(element, className) {
-    return element.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-  }
-
-  /**
-   * DOM添加/删除类的切换操作
-   * @param {HTMLElement} element - DOM元素
-   * @param {string} className - 类名
-   * */
-  function toggleClass(element, className) {
-    if (hasClass(element, className)) {
-      removeClass(element, className);
-    } else {
-      addClass(element, className);
-    }
-  }
-
-  var index$2 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    addScript: addScript,
-    addClass: addClass,
-    removeClass: removeClass,
-    hasClass: hasClass,
-    toggleClass: toggleClass
-  });
 
   /**
    * 常用工具函数模块
@@ -327,11 +169,141 @@
     value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
     return value;
   }
+
+  /**
+   * 格式化现在的已过时间
+   * @param {Date} startTime
+   * @return {String}
+   * @example
+   *
+   * formatPassTime(new Date(2022-01-01 00:00:00)) ===> 1年前
+   * formatPassTime(new Date(2021-21-01 10:00:00)) ===> 2月前
+   */
+  function formatPassTime(startTime) {
+    var currentTime = Date.parse(new Date()),
+      time = currentTime - startTime,
+      day = parseInt(time / (1000 * 60 * 60 * 24)),
+      hour = parseInt(time / (1000 * 60 * 60)),
+      min = parseInt(time / (1000 * 60)),
+      month = parseInt(day / 30),
+      year = parseInt(month / 12);
+    if (year) return year + '年前';
+    if (month) return month + '个月前';
+    if (day) return day + '天前';
+    if (hour) return hour + '小时前';
+    if (min) return min + '分钟前';else return '刚刚';
+  }
+
+  /**
+   * 格式化时间戳
+   * @param {number} time 时间戳
+   * @param {string} fmt 格式
+   * @return {String}
+   * @example
+   * formatTime(1700152449834) ===> 2023-11-17 00:34:09
+   */
+  function formatTime(time) {
+    var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd hh:mm:ss';
+    var ret;
+    var date = new Date(time);
+    var opt = {
+      'y+': date.getFullYear().toString(),
+      'M+': (date.getMonth() + 1).toString(),
+      // 月份
+      'd+': date.getDate().toString(),
+      // 日
+      'h+': date.getHours().toString(),
+      // 小时
+      'm+': date.getMinutes().toString(),
+      // 分
+      's+': date.getSeconds().toString() // 秒
+    };
+
+    for (var k in opt) {
+      ret = new RegExp('(' + k + ')').exec(fmt);
+      if (ret) {
+        fmt = fmt.replace(ret[1], ret[1].length === 1 ? opt[k] : opt[k].padStart(ret[1].length, '0'));
+      }
+    }
+    return fmt;
+  }
+
+  /**
+   * 添加script
+   * @param {string} url js url
+   * @param {function} [onload] 加载成功回调
+   * @param {function} [onerror] 加载失败回调
+   * @return {HTMLElement} script引用
+   */
+  function addScript(url, onload, onerror) {
+    var script = document.createElement('script');
+    if (onload) {
+      script.onload = function () {
+        onload(script);
+      };
+    }
+    script.onerror = function () {
+      if (onerror) {
+        onerror(script);
+      } else if (onload) {
+        onload(script);
+      }
+    };
+    script.src = url;
+    document.head.appendChild(script);
+    return script;
+  }
+
+  /**
+   * DOM添加类
+   * @param {HTMLElement} element - DOM元素
+   * @param {string} className - 类名
+   * */
+  function addClass(element, className) {
+    var regClassName = new RegExp('(^| )' + className + '( |$)');
+    // ( /\s+/ 匹配任何空白符，包括\n,\r,\f,\t,\v等（换行、回车、空格、tab等）})
+    if (!regClassName.test(element.className)) {
+      element.className = element.className.split(/\s+/).concat(className).join(' ');
+    }
+  }
+
+  /**
+   * DOM删除类
+   * @param {HTMLElement} element - DOM元素
+   * @param {string} className - 类名
+   * */
+  function removeClass(element, className) {
+    var regClassName = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g');
+    element.className = element.className.replace(regClassName, '');
+  }
+
+  /**
+   * 判断DOM是否有某个类名
+   * @param {HTMLElement} element - DOM元素
+   * @param {string} className - 类名
+   * @return {Boolean} 判断后的值
+   * */
+  function hasClass(element, className) {
+    return element.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+  }
+
+  /**
+   * DOM添加/删除类的切换操作
+   * @param {HTMLElement} element - DOM元素
+   * @param {string} className - 类名
+   * */
+  function toggleClass(element, className) {
+    if (hasClass(element, className)) {
+      removeClass(element, className);
+    } else {
+      addClass(element, className);
+    }
+  }
   function getType(obj) {
     return Object.prototype.toString.call(obj).slice(8, -1);
   }
 
-  var index$1 = /*#__PURE__*/Object.freeze({
+  var util = /*#__PURE__*/Object.freeze({
     __proto__: null,
     deepCopyBy: deepCopyBy,
     deepCopy: deepCopy,
@@ -339,7 +311,14 @@
     debounce: debounce,
     throttle: throttle,
     hasKeys: hasKeys,
-    getNum: getNum
+    getNum: getNum,
+    formatPassTime: formatPassTime,
+    formatTime: formatTime,
+    addScript: addScript,
+    addClass: addClass,
+    removeClass: removeClass,
+    hasClass: hasClass,
+    toggleClass: toggleClass
   });
 
   /**
@@ -392,7 +371,7 @@
     return /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(val);
   }
 
-  var index = /*#__PURE__*/Object.freeze({
+  var regexp = /*#__PURE__*/Object.freeze({
     __proto__: null,
     isIP: isIP,
     isPhone: isPhone,
@@ -401,56 +380,111 @@
     isUrl: isUrl
   });
 
-  var fullScreenLoading = null;
-  var Loading = function Loading() {
-    if (fullScreenLoading) {
-      return fullScreenLoading;
+  /**
+   * cookie模块
+   * @module cookie
+   * */
+
+  /**
+   * Sets a Cookie with the given name and value.
+   *
+   * name       Name of the cookie
+   * value      Value of the cookie
+   * [expires]  Expiration date of the cookie (default: end of current session)
+   * [path]     Path where the cookie is valid (default: path of calling document)
+   * [domain]   Domain where the cookie is valid
+   *              (default: domain of calling document)
+   * [secure]   Boolean value indicating if the cookie transmission requires a
+   *              secure transmission
+   *
+   * @example setCookie("tasty","strawberry2")
+   * @example setCookie("yummy","choco2",getDate('s3'))
+   */
+  function setCookie(name, value, expires, path, domain, secure) {
+    document.cookie = name + '=' + escape(value) + (expires ? '; expires=' + expires.toUTCString() : '') + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '') + (secure ? '; secure' : '');
+  }
+
+  /**
+   * Gets the value of the specified cookie.
+   *
+   * name  Name of the desired cookie.
+   *
+   * Returns a string containing value of specified cookie,
+   *   or null if cookie does not exist.
+   *
+   * @example getCookie('tasty')
+   */
+  function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + '=';
+    var begin = dc.indexOf('; ' + prefix);
+    if (begin === -1) {
+      begin = dc.indexOf(prefix);
+      if (begin !== 0) return null;
+    } else {
+      begin += 2;
     }
-    var instance = {
-      showing: false,
-      el: null,
-      init: function init() {
-        var loadingEle = document.createElement('div');
-        loadingEle.setAttribute('id', 'loading');
-        var span = document.createElement('div');
-        span.innerText = 'loading...';
-        span.setAttribute('class', 'text');
-        loadingEle.appendChild(span);
-        this.el = loadingEle;
-      },
-      setText: function setText(text) {
-        var span = this.el.querySelector('.text');
-        span.innerText = text || 'loading...';
-        return this;
-      },
-      show: function show() {
-        if (!this.showing) {
-          this.showing = true;
-          document.body.appendChild(this.el);
-        }
-        return this;
-      },
-      hide: function hide() {
-        if (this.showing) {
-          this.showing = false;
-          document.body.removeChild(this.el);
-        }
-        return this;
-      }
-    };
-    instance.init();
-    fullScreenLoading = instance;
-    return instance;
+    var end = document.cookie.indexOf(';', begin);
+    if (end === -1) {
+      end = dc.length;
+    }
+    return unescape(dc.substring(begin + prefix.length, end));
+  }
+
+  /**
+   * Deletes the specified cookie.
+   *
+   * name      name of the cookie
+   * [path]    path of the cookie (must be same as path used to create cookie)
+   * [domain]  domain of the cookie (must be same as domain used to create cookie)
+   *
+   * @example deleteCookie('tasty','/grou-purchase','.abobe.com');
+   */
+  function deleteCookie(name, path, domain) {
+    if (getCookie(name)) {
+      document.cookie = name + '=' + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '') + '; expires=Thu, 01-Jan-70 00:00:01 GMT';
+    }
+  }
+
+  /**
+   * 获取想要的时间
+   * str s1一秒 h1一小时 d1一天
+   * @example getDate('s30') 30s之后的时间
+   * @return {number} 当前时间+str的时间
+   * */
+  function getDate(str) {
+    var str1 = str.substring(0, 1);
+    var str2 = str.substring(1, str.length) * 1;
+    var time = 0;
+    if (str1 === 's') {
+      time = str2 * 1000;
+    } else if (str1 === 'h') {
+      time = str2 * 60 * 60 * 1000;
+    } else if (str1 === 'd') {
+      time = str2 * 24 * 60 * 60 * 1000;
+    }
+    var data = new Date();
+    data.setTime(data.valueOf() + time);
+    return data;
+  }
+
+  var cookie = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    getDate: getDate,
+    setCookie: setCookie,
+    getCookie: getCookie,
+    deleteCookie: deleteCookie
+  });
+
+  console.log("%c ".concat(name, " %c v").concat(version, " %c ").concat(homepage), 'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060; font-weight: bold;', 'padding: 2px 1px; border-radius: 0 0 0 0; color: #fff; background: #42c02e; font-weight: bold;', 'padding: 2px 2px 2px 2px; border-radius: 0 3px 3px 0; color: #fff; background: #ffc3dc; font-weight: bold;');
+  var index = {
+    version: version,
+    name: name,
+    util: util,
+    regexp: regexp,
+    cookie: cookie
   };
 
-  console.log("%c ".concat(name, " %c v").concat(version, " %c ").concat(repository.url), 'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060; font-weight: bold;', 'padding: 2px 1px; border-radius: 0 0 0 0; color: #fff; background: #42c02e; font-weight: bold;', 'padding: 2px 2px 2px 2px; border-radius: 0 3px 3px 0; color: #fff; background: #ffc3dc; font-weight: bold;');
-
-  exports.Loading = Loading;
-  exports.date = index$3;
-  exports.dom = index$2;
-  exports.name = name;
-  exports.regexp = index;
-  exports.util = index$1;
-  exports.version = version;
+  return index;
 
 }));
