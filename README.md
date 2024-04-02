@@ -35,8 +35,8 @@ Git 提交规范：husky + lint-staged + commitlint
 
 开发 `npm run dev`
 
-打包 `npm run build`
+打包SDK `npm run build:lib`
+
+生成文档 `npm run build:doc`
 
 单元测试 `npm run test`
-
-生成文档 `npm run generate-docs`
