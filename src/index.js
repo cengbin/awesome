@@ -10,12 +10,12 @@ console.log(
 import './console/index'
 import * as util from './util/index'
 import * as regexp from './regexp/index'
-import * as cookie from './cookie/index'
+import * as os from './os/index'
 
 export default {
 	version,
 	name,
 	util,
 	regexp,
-	cookie
+	os
 }
