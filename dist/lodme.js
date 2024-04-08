@@ -4,9 +4,9 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Common = factory());
 })(this, (function () { 'use strict';
 
-  var name = "awesome-common";
-  var version = "0.0.2";
-  var homepage = "https://cengbin.github.io/awesome-common";
+  var name = "lodme";
+  var version = "0.0.1";
+  var homepage = "https://cengbin.github.io/lodme";
 
   /**
    * console模块是对console的扩展
