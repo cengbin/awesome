@@ -22,15 +22,15 @@ lodme 是一个 JavaScript 软件开发工具包（JavaScript Software Developme
 
 文档生成：jsdoc
 
-测试：jest
+测试：Jest
 
-代码质量：eslint
+代码质量：ESLint
 
-代码风格：prettier
+代码风格：Prettier
 
-Git 提交规范：husky + lint-staged + commitlint
+Git 提交：CommitLint
 
-### 脚本命令
+### 命令
 
 开发 `npm run dev`
 
