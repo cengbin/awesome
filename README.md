@@ -16,6 +16,16 @@ lodme 是一个 JavaScript 软件开发工具包（JavaScript Software Developme
 
 [SDK 在线文档](https://cengbin.github.io/lodme/)
 
+### 命令行
+
+开发 `npm run dev`
+
+打包SDK `npm run build:lib`
+
+生成文档 `npm run build:doc`
+
+单元测试 `npm run test`
+
 ### 技术栈
 
 模块打包：rollup
@@ -29,13 +39,3 @@ lodme 是一个 JavaScript 软件开发工具包（JavaScript Software Developme
 代码风格：Prettier
 
 Git 提交：CommitLint
-
-### 命令
-
-开发 `npm run dev`
-
-打包SDK `npm run build:lib`
-
-生成文档 `npm run build:doc`
-
-单元测试 `npm run test`
