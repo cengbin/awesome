@@ -1,6 +1,6 @@
 # lodme
 
-JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）。
+lodme 是一个 JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）。
 
 ### 引用方式
 
