@@ -1,4 +1,4 @@
-# awesome-common
+# lodme
 
 JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）。
 
@@ -6,15 +6,15 @@ JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK�
 
 **NPM**
 
-`$ npm install awesome-common --save`
+`$ npm install lodme --save`
 
 **script**
 
-`<script src='./dist/awesome-common.min.js'></script>`
+`<script src='./dist/lodme.min.js'></script>`
 
 ### 使用文档
 
-[SDK 在线文档](https://cengbin.github.io/awesome-common/)
+[SDK 在线文档](https://cengbin.github.io/lodme/)
 
 ### 技术栈
 

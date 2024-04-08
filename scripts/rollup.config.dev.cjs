@@ -1,12 +1,13 @@
 const json = require('@rollup/plugin-json')
+const {name, version} = require('../package.json')
 
 module.exports = [
 	{
 		input: 'src/index.js',
 		output: {
-			file: `dist/awesome-common.js`,
-			format: 'umd',
-			name: 'AwesomeCommon'
+			file: `dist/${name}.js`,
+            format: 'umd',
+            name: name,
 		},
 		plugins: [json()]
 	}

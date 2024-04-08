@@ -1,17 +1,17 @@
 {
-  "name": "awesome-common",
-  "version": "0.0.2",
+  "name": "lodme",
+  "version": "0.0.1",
   "description": "JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）",
   "keywords": "SDK, 工具包",
-  "homepage": "https://cengbin.github.io/awesome-common",
-  "main": "dist/awesome-common.min.js",
+  "homepage": "https://cengbin.github.io/lodme",
+  "main": "dist/lodme.min.js",
   "files": [
     "dist",
     "src"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cengbin/awesome-common.git"
+    "url": "https://github.com/cengbin/lodme.git"
   },
   "scripts": {
     "dev": "rollup --config scripts/rollup.config.dev.cjs  -w",
