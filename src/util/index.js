@@ -118,7 +118,7 @@ export function getNum(value) {
 	// value = value.replace(/^(\-)*(\d+)\.(\d).*$/, "$1$2.$3");
 	// 只能输入两个小数
 	// eslint-disable-next-line
-	value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3')
+  value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3')
 	return value
 }
 
@@ -245,6 +245,29 @@ export function toggleClass(element, className) {
 	} else {
 		addClass(element, className)
 	}
+}
+
+export function secondToHour(second) {
+	return second / 60 / 60
+}
+
+export function secondToMinute(second) {
+	return second / 60
+}
+
+export function secondsToHms(seconds) {
+	// 定义时分秒变量
+	let h = Math.floor(seconds / 3600) // 计算小时数
+	let m = Math.floor((seconds % 3600) / 60) // 计算分钟数
+	let s = seconds % 60 // 计算秒数
+
+	// 格式化时分秒为两位数（如果需要）
+	h = h < 10 ? '0' + h : h
+	m = m < 10 ? '0' + m : m
+	s = s < 10 ? '0' + s : s
+
+	// 返回时分秒字符串
+	return h + ':' + m + ':' + s
 }
 
 function getType(obj) {

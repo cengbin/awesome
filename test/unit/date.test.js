@@ -1,4 +1,4 @@
-import { formatPassTime, formatTime } from '../../src/date'
+import { formatPassTime, formatTime } from '../../src/util'
 
 describe('date 模块测试', () => {
 	test('formatPassTime()测试', () => {

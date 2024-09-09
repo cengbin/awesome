@@ -1,20 +1,20 @@
-# lodme
+# awesome.ts
 
-lodme 是一个 JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）。
+awesome.ts 是一个 JavaScript 软件开发工具包（JavaScript Software Development Kit，JS SDK）。
 
 ### 引用方式
 
 **NPM**
 
-`$ npm install lodme --save`
+`$ npm install awesome.ts --save`
 
 **script**
 
-`<script src='./dist/lodme.min.js'></script>`
+`<script src='./dist/awesome.min.js'></script>`
 
 ### 使用文档
 
-[SDK 在线文档](https://cengbin.github.io/lodme/)
+[SDK 在线文档](https://cengbin.github.io/awesome/)
 
 ### 命令行
 
