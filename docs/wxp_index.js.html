@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>os/index.js - Documentation</title>
+    <title>wxp/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -37,7 +37,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">os/index.js</h1>
+    <h1 class="page-title">wxp/index.js</h1>
     
 
     
@@ -48,34 +48,25 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * OS模块，获取系统/平台信息
- * @module os
+ * wxp模块，对wx api的扩展
+ * @module wxp
  * */
 
 /**
- * 是否是 window 系统
+ * 跳转到指定路径
+ * @param url {String} 路径
+ * @param queryObj {Object} 路径参数
  * */
-export function isWindows() {}
+export function navigateToUrl(url, queryObj = {}) {
+	const queryString = Object.keys(queryObj)
+		.filter((key) => queryObj[key] != null || queryObj[key] != undefined)
+		.map((key) => `${key}=${queryObj[key]}`)
+		.join('&amp;')
 
-/**
- * 是否是 MacOS 系统
- * */
-export function isMacOS() {}
+	url = `${url}?${queryString}`
 
-/**
- * 是否是 Android 系统
- * */
-export function isAndroid() {}
-
-/**
- * 是否是京东App平台
- * */
-export function isJDApp() {}
-
-/**
- * 是否是淘宝App平台
- * */
-export function isTaobaoApp() {}
+	wx.navigateTo({ url })
+}
 </code></pre>
         </article>
     </section>
