@@ -106,7 +106,7 @@ export function hasKeys(obj, keys) {
  * 格式化字符串成数字，保留2位小数
  * @param value 格式化的字符串
  * */
-export function getNum(value) {
+export function formatToNum(value) {
 	value = value.toString()
 	// 只能输入"数字"和"."
 	value = value.replace(/[^\d.]/g, '')

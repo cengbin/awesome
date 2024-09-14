@@ -19,11 +19,11 @@ export function isMacOS() {}
 export function isAndroid() {}
 
 /**
- * 是否是京东App平台
+ * 是否是 IOS 系统
  * */
-export function isJDApp() {}
+export function isIOS() {}
 
 /**
- * 是否是淘宝App平台
+ * 是否是团子出行App
  * */
-export function isTaobaoApp() {}
+export function isTuanZiApp() {}
