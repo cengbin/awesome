@@ -13,6 +13,8 @@ module.exports = {
 		// jquery
 		$: true,
 		jQuery: true,
+		// 微信
+		wx: true,
 	},
 	parser: "@babel/eslint-parser",
 	parserOptions: {

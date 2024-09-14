@@ -16,7 +16,7 @@ awesome.ts 是一个 JavaScript 软件开发工具包（JavaScript Software Deve
 
 [SDK 在线文档](https://cengbin.github.io/awesome/)
 
-### 命令行
+### 开发
 
 开发 `npm run dev`
 

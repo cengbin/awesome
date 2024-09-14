@@ -270,6 +270,10 @@ export function secondsToHms(seconds) {
 	return h + ':' + m + ':' + s
 }
 
+export function padZero(num) {
+	return num < 10 ? '0' + num : num.toString()
+}
+
 function getType(obj) {
 	return Object.prototype.toString.call(obj).slice(8, -1)
 }

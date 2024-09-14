@@ -1,21 +1,33 @@
-import { name, version, homepage } from '../package.json'
+import { name, version } from '../package.json'
 
-console.log(
-	`%c ${name} %c v${version} %c ${homepage}`,
-	'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060; font-weight: bold;',
-	'padding: 2px 1px; border-radius: 0 0 0 0; color: #fff; background: #42c02e; font-weight: bold;',
-	'padding: 2px 2px 2px 2px; border-radius: 0 3px 3px 0; color: #fff; background: #ffc3dc; font-weight: bold;'
-)
-
-import './console/index'
 import * as util from './util/index'
 import * as regexp from './regexp/index'
 import * as os from './os/index'
+import * as wxp from './wxp/index'
+
+function getEffectiveCity(cities, cityNo) {
+	let effectiveCity
+	for (let i = 0; i < cities.length; i++) {
+		const city = cities[i]
+		if (city.cityNo == cityNo) {
+			// 先匹配6位，匹配区县
+			effectiveCity = city
+			break
+		} else if (String(city.cityNo).slice(0, 4) == String(cityNo).slice(0, 4) && city.level == '2') {
+			// 再匹配4位，匹配市
+			// 城市列表中有可能出现【市】在【区/县】的前面，所以要继续匹配。
+			effectiveCity = city
+		}
+	}
+	return effectiveCity
+}
 
 export default {
 	version,
 	name,
 	util,
 	regexp,
-	os
+	os,
+	wxp,
+	getEffectiveCity
 }

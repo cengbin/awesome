@@ -6,39 +6,6 @@
 
   var name = "awesome";
   var version = "0.0.1";
-  var homepage = "https://cengbin.github.io/awesome";
-
-  /**
-   * console模块是对console的扩展
-   * @module console
-   * */
-
-  /*
-   * 参考：
-   * https://github.com/chalk/chalk
-   * https://juejin.cn/post/7087192401978064933?searchId=20231116233523CE494AE6E9FA148D7D6F
-   * */
-
-  var colors = ['blue', 'red', 'green'];
-  colors.forEach(function (color) {
-    console[color] = function () {
-      var logTime = new Date();
-      for (var _len = arguments.length, arg = new Array(_len), _key = 0; _key < _len; _key++) {
-        arg[_key] = arguments[_key];
-      }
-      console.log("".concat(formatTimestamp(logTime), " ===> %c ").concat(arg), "background-color:".concat(color, ";color:white;"));
-    };
-  });
-  function formatTimestamp(timestamp) {
-    var year = timestamp.getFullYear();
-    var month = ('0' + (timestamp.getMonth() + 1)).slice(-2);
-    var date = ('0' + timestamp.getDate()).slice(-2);
-    var h = ('0' + timestamp.getHours()).slice(-2);
-    var m = ('0' + timestamp.getMinutes()).slice(-2);
-    var s = ('0' + timestamp.getSeconds()).slice(-2);
-    var ms = ('00' + timestamp.getMilliseconds()).slice(-3);
-    return '[' + year + '-' + month + '-' + date + ' ' + h + ':' + m + ':' + s + ':' + ms + ']';
-  }
 
   /**
    * 常用工具函数模块
@@ -312,12 +279,15 @@
     var s = seconds % 60; // 计算秒数
 
     // 格式化时分秒为两位数（如果需要）
-    h = h < 10 ? "0" + h : h;
-    m = m < 10 ? "0" + m : m;
-    s = s < 10 ? "0" + s : s;
+    h = h < 10 ? '0' + h : h;
+    m = m < 10 ? '0' + m : m;
+    s = s < 10 ? '0' + s : s;
 
     // 返回时分秒字符串
-    return h + ":" + m + ":" + s;
+    return h + ':' + m + ':' + s;
+  }
+  function padZero(num) {
+    return num < 10 ? '0' + num : num.toString();
   }
   function getType(obj) {
     return Object.prototype.toString.call(obj).slice(8, -1);
@@ -341,7 +311,8 @@
     toggleClass: toggleClass,
     secondToHour: secondToHour,
     secondToMinute: secondToMinute,
-    secondsToHms: secondsToHms
+    secondsToHms: secondsToHms,
+    padZero: padZero
   });
 
   /**
@@ -442,13 +413,58 @@
     isTaobaoApp: isTaobaoApp
   });
 
-  console.log("%c ".concat(name, " %c v").concat(version, " %c ").concat(homepage), 'padding: 2px 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060; font-weight: bold;', 'padding: 2px 1px; border-radius: 0 0 0 0; color: #fff; background: #42c02e; font-weight: bold;', 'padding: 2px 2px 2px 2px; border-radius: 0 3px 3px 0; color: #fff; background: #ffc3dc; font-weight: bold;');
+  /**
+   * wxp模块，对wx api的扩展
+   * @module wxp
+   * */
+
+  /**
+   * 跳转到指定路径
+   * @param url {String} 路径
+   * @param queryObj {Object} 路径参数
+   * */
+  function navigateToUrl(url) {
+    var queryObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var queryString = Object.keys(queryObj).filter(function (key) {
+      return queryObj[key] != null || queryObj[key] != undefined;
+    }).map(function (key) {
+      return "".concat(key, "=").concat(queryObj[key]);
+    }).join('&');
+    url = "".concat(url, "?").concat(queryString);
+    wx.navigateTo({
+      url: url
+    });
+  }
+
+  var wxp = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    navigateToUrl: navigateToUrl
+  });
+
+  function getEffectiveCity(cities, cityNo) {
+    var effectiveCity;
+    for (var i = 0; i < cities.length; i++) {
+      var city = cities[i];
+      if (city.cityNo == cityNo) {
+        // 先匹配6位，匹配区县
+        effectiveCity = city;
+        break;
+      } else if (String(city.cityNo).slice(0, 4) == String(cityNo).slice(0, 4) && city.level == '2') {
+        // 再匹配4位，匹配市
+        // 城市列表中有可能出现【市】在【区/县】的前面，所以要继续匹配。
+        effectiveCity = city;
+      }
+    }
+    return effectiveCity;
+  }
   var index = {
     version: version,
     name: name,
     util: util,
     regexp: regexp,
-    os: os
+    os: os,
+    wxp: wxp,
+    getEffectiveCity: getEffectiveCity
   };
 
   return index;
