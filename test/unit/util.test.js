@@ -1,4 +1,4 @@
-import {formatToNum, formatPhone, hasKeys, secondToHour, secondToMinute} from '../../src/util'
+import {formatToNum, formatPhone, hasKeys, secondToHour, secondToMinute, hslToRgb} from '../../src/util'
 
 describe('tools 模块测试', () => {
   test("formatToNum('1a3.456') ---> 13.45", () => {
@@ -18,10 +18,14 @@ describe('tools 模块测试', () => {
   })
 
   test("secondToHour(3600) ---> 1", () => {
-    expect(secondToHour(60*60)).toBe(1)
+    expect(secondToHour(60 * 60)).toBe(1)
   })
 
   test("secondToHour(3660) ---> 60", () => {
-    expect(secondToMinute(60*60)).toBe(60)
+    expect(secondToMinute(60 * 60)).toBe(60)
+  })
+
+  test("hslToRgb(255,0,0) ---> 60", () => {
+    console.log(hslToRgb(0, 1, 0.5))
   })
 })
