@@ -1,10 +1,10 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.awesome = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Awesome = factory());
 })(this, (function () { 'use strict';
 
-  var name = "awesome";
+  var name = "awesome.ts";
   var version = "0.0.1";
 
   /**
@@ -121,7 +121,7 @@
    * 格式化字符串成数字，保留2位小数
    * @param value 格式化的字符串
    * */
-  function getNum(value) {
+  function formatToNum(value) {
     value = value.toString();
     // 只能输入"数字"和"."
     value = value.replace(/[^\d.]/g, '');
@@ -286,8 +286,47 @@
     // 返回时分秒字符串
     return h + ':' + m + ':' + s;
   }
+
+  /**
+   * 在小于10的数字之前补0
+   * @param {Number} num
+   * @return {String} 补0之后的值
+   * */
   function padZero(num) {
     return num < 10 ? '0' + num : num.toString();
+  }
+
+  /**
+   * HSL颜色值转换为RGB.
+   * 换算公式改编自 http://en.wikipedia.org/wiki/HSL_color_space.
+   * h, s, 和 1 设定在 [0,1] 之间
+   * 返回的 r, g, 和 b 在 [0,255] 之间
+   *
+   * @param Number h 色相
+   * @param Number s 饱和度
+   * @param Number 1 亮度
+   * @return Array RGB色值数值
+   */
+  function hslToRgb(h, s, l) {
+    var r, g, b;
+    if (s == 0) {
+      r = g = b = 1; // achromatic
+    } else {
+      var hue2rgb = function hue2rgb(p, q, t) {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+      var q = l < 0.5 ? 1 * (1 + s) : 1 + s - 1 * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
   }
   function getType(obj) {
     return Object.prototype.toString.call(obj).slice(8, -1);
@@ -301,7 +340,7 @@
     debounce: debounce,
     throttle: throttle,
     hasKeys: hasKeys,
-    getNum: getNum,
+    formatToNum: formatToNum,
     formatPassTime: formatPassTime,
     formatTime: formatTime,
     addScript: addScript,
@@ -312,7 +351,8 @@
     secondToHour: secondToHour,
     secondToMinute: secondToMinute,
     secondsToHms: secondsToHms,
-    padZero: padZero
+    padZero: padZero,
+    hslToRgb: hslToRgb
   });
 
   /**
@@ -395,22 +435,22 @@
   function isAndroid() {}
 
   /**
-   * 是否是京东App平台
+   * 是否是 IOS 系统
    * */
-  function isJDApp() {}
+  function isIOS() {}
 
   /**
-   * 是否是淘宝App平台
+   * 是否是团子出行App
    * */
-  function isTaobaoApp() {}
+  function isTuanZiApp() {}
 
   var os = /*#__PURE__*/Object.freeze({
     __proto__: null,
     isWindows: isWindows,
     isMacOS: isMacOS,
     isAndroid: isAndroid,
-    isJDApp: isJDApp,
-    isTaobaoApp: isTaobaoApp
+    isIOS: isIOS,
+    isTuanZiApp: isTuanZiApp
   });
 
   /**
@@ -441,30 +481,13 @@
     navigateToUrl: navigateToUrl
   });
 
-  function getEffectiveCity(cities, cityNo) {
-    var effectiveCity;
-    for (var i = 0; i < cities.length; i++) {
-      var city = cities[i];
-      if (city.cityNo == cityNo) {
-        // 先匹配6位，匹配区县
-        effectiveCity = city;
-        break;
-      } else if (String(city.cityNo).slice(0, 4) == String(cityNo).slice(0, 4) && city.level == '2') {
-        // 再匹配4位，匹配市
-        // 城市列表中有可能出现【市】在【区/县】的前面，所以要继续匹配。
-        effectiveCity = city;
-      }
-    }
-    return effectiveCity;
-  }
   var index = {
     version: version,
     name: name,
     util: util,
     regexp: regexp,
     os: os,
-    wxp: wxp,
-    getEffectiveCity: getEffectiveCity
+    wxp: wxp
   };
 
   return index;
